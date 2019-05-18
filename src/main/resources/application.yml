@@ -1,0 +1,11 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    username: ${LOCAL_JDBC_USER}
+    password: ${LOCAL_JDBC_PASS}
+    url: ${LOCAL_JDBC_URL}
+  jpa:
+    hibernate:
+      ddl-auto: update
