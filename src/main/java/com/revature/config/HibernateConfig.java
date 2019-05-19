@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.revature.models.Employee;
@@ -42,10 +43,10 @@ public class HibernateConfig {
 	}
 	@Bean
 	@Inject
-	public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory) {
+	public JpaTransactionManager getTransactionManager(SessionFactory sessionFactory) {
 		System.out.println("Configuring transaction manager");
-		HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-		transactionManager.setSessionFactory(sessionFactory);
+		JpaTransactionManager transactionManager = new JpaTransactionManager();
+		transactionManager.getEntityManagerFactory();    //setSessionFactory(sessionFactory);
 		return transactionManager;
 	}
 	@Bean(name="dataSource")

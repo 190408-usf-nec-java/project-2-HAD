@@ -1,11 +1,11 @@
 package com.revature.repositories;
 
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.models.Shift;
 

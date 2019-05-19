@@ -21,6 +21,7 @@ public class ShiftController {
 	}
 	@PostMapping("")
 	public void createShift(@RequestBody Shift shift) {
+		System.out.println(shift);
 		shiftService.createShift(shift);
 	}
 }
