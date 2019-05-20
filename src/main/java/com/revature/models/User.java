@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-@Entity
+@Entity(name = "people")
 public class User {
 
 	@Id
@@ -15,19 +15,15 @@ public class User {
 	private int id;
 	
 	@NotNull
-	@Column
 	private String firstName;
 	
 	@NotNull
-	@Column
 	private String lastName;
 	
 	@NotNull
-	@Column
 	private String email;
 	
 	@NotNull
-	@Column
 	private int role;
 
 	public int getId() {
