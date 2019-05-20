@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.revature.models.Employee;
 import com.revature.models.Shift;
+import com.revature.models.User;
 
 @Configuration
 @EnableTransactionManagement
@@ -35,7 +36,7 @@ public class HibernateConfig {
 		LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 		factoryBean.setConfigLocation(new ClassPathResource("hibernate.cfg.xml"));
 		
-		factoryBean.setAnnotatedClasses(Shift.class, Employee.class);
+		factoryBean.setAnnotatedClasses(Shift.class, Employee.class, User.class);
 		
 		factoryBean.setDataSource(getDataSource());
 		
