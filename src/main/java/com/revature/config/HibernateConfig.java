@@ -14,6 +14,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.revature.models.Business;
 import com.revature.models.Employee;
 import com.revature.models.Shift;
 import com.revature.models.User;
@@ -36,7 +37,7 @@ public class HibernateConfig {
 		LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 		factoryBean.setConfigLocation(new ClassPathResource("hibernate.cfg.xml"));
 		
-		factoryBean.setAnnotatedClasses(Shift.class, Employee.class, User.class);
+		factoryBean.setAnnotatedClasses(Shift.class, Employee.class, User.class, Business.class);
 		
 		factoryBean.setDataSource(getDataSource());
 		
