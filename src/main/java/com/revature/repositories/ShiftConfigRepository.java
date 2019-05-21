@@ -7,21 +7,23 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.revature.models.Shift;
+import com.revature.models.ShiftConfig;
 
 @Repository
-public class ShiftRepository {
+public class ShiftConfigRepository {
+
 	
 	SessionFactory sf;
 	
 	@Inject
-	public ShiftRepository(SessionFactory sf) {
+	public ShiftConfigRepository(SessionFactory sf) {
 		this.sf = sf;
 	}
 	
 	@Transactional
-	public void saveShift(Shift shift) {
+	public void saveConfig(ShiftConfig shiftConfig) {
 		Session session = sf.getCurrentSession();
-		session.save(shift);
+		session.save(shiftConfig);
 	}
+	
 }
