@@ -110,7 +110,6 @@ public class Day {
 		this.date = date;
 		this.shifts = shifts;
 	}
-
 	public Day() {
 		super();
 		// TODO Auto-generated constructor stub

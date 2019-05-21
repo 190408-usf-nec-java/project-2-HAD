@@ -32,9 +32,9 @@ public class WeekController {
 		weekService.createWeek(week);
 	}
 	
-	@GetMapping("/{id}")
-	public Week getWeekById(@PathVariable int id) {
-		return Optional.ofNullable(this.weekService.getWeekById(id))
+	@GetMapping("/{userId}")
+	public Week getWeekById(@PathVariable int userId) {
+		return Optional.ofNullable(this.weekService.getWeekById(userId))
 				.orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
 	}
 }
