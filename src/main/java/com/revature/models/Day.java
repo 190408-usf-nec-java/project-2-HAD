@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -19,8 +20,11 @@ public class Day {
 	@NotNull
 	private String name;
 	
-	@ManyToMany
-	private List<Week> weeks;
+	@NotNull
+	private String date;
+	
+	@OneToMany
+	private List<Shift> shifts;
 
 	public int getId() {
 		return id;
@@ -38,34 +42,30 @@ public class Day {
 		this.name = name;
 	}
 
-	public List<Week> getWeeks() {
-		return weeks;
+	public String getDate() {
+		return date;
 	}
 
-	public Day() {
-		super();
-		// TODO Auto-generated constructor stub
+	public void setDate(String date) {
+		this.date = date;
 	}
 
-	public Day(int id, @NotNull String name, List<Week> weeks) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.weeks = weeks;
+	public List<Shift> getShifts() {
+		return shifts;
 	}
 
-	@Override
-	public String toString() {
-		return "Day [id=" + id + ", name=" + name + ", weeks=" + weeks + "]";
+	public void setShifts(List<Shift> shifts) {
+		this.shifts = shifts;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((weeks == null) ? 0 : weeks.hashCode());
+		result = prime * result + ((shifts == null) ? 0 : shifts.hashCode());
 		return result;
 	}
 
@@ -78,6 +78,11 @@ public class Day {
 		if (getClass() != obj.getClass())
 			return false;
 		Day other = (Day) obj;
+		if (date == null) {
+			if (other.date != null)
+				return false;
+		} else if (!date.equals(other.date))
+			return false;
 		if (id != other.id)
 			return false;
 		if (name == null) {
@@ -85,18 +90,31 @@ public class Day {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (weeks == null) {
-			if (other.weeks != null)
+		if (shifts == null) {
+			if (other.shifts != null)
 				return false;
-		} else if (!weeks.equals(other.weeks))
+		} else if (!shifts.equals(other.shifts))
 			return false;
 		return true;
 	}
 
-	public void setWeeks(List<Week> weeks) {
-		this.weeks = weeks;
+	@Override
+	public String toString() {
+		return "Day [id=" + id + ", name=" + name + ", date=" + date + ", shifts=" + shifts + "]";
 	}
 
-	
+	public Day(int id, @NotNull String name, @NotNull String date, List<Shift> shifts) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.date = date;
+		this.shifts = shifts;
+	}
+
+	public Day() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	
 }

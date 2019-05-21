@@ -24,4 +24,10 @@ public class WeekRepository {
 		Session session = sf.getCurrentSession();
 		session.save(week);
 	}
+	
+	@Transactional
+	public Week getWeekById(int id) {
+		Session session = sf.getCurrentSession();
+		return session.get(Week.class, id);
+	}
 }

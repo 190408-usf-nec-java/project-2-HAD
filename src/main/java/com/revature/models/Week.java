@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Week {
@@ -15,7 +17,10 @@ public class Week {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@ManyToMany
+	@OneToOne
+	private Day firstDay;
+	
+	@OneToMany
 	private List<Day> days;
 
 	public int getId() {
