@@ -1,5 +1,7 @@
 package com.revature.services;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,15 @@ public class UserServices {
 	}
 	public void createUser(User user) {
 		userRepository.saveUser(user);
+	}
+	public List<User> getAllUsers() {
+		return userRepository.getAllUsers();
+	}
+	public User getUserById(int id) {
+		return userRepository.getUserById(id);
+	}
+	public User deleteUserById(int id) {
+		return userRepository.deleteUserById(id);
 	}
 
 }
