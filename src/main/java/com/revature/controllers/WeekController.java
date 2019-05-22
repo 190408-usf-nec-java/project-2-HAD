@@ -41,6 +41,6 @@ public class WeekController {
 	}
 	@GetMapping("")
 	public String testGet() throws URISyntaxException {
-		return Application.class.getProtectionDomain().getCodeSource().getLocation().getPath().toString();
+		return "We are trying to finally get it working.";
 	}
 }
