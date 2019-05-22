@@ -41,6 +41,6 @@ public class WeekController {
 	}
 	@GetMapping("")
 	public String testGet() throws URISyntaxException {
-		return "We are trying to finally get it working.";
+		return "Finally working, great job!";
 	}
 }
