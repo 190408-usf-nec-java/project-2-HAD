@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
@@ -21,19 +22,100 @@ public class ShiftConfig {
 	@NotNull
 	private int endTime;
 	@NotNull
+	@OneToOne
+	@JoinColumn(name = "weekDays_id")
 	private WeekDays weekdays;
 	@NotNull
 	private int numberOfEmployees;
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	private int userId;
+	private User user;
 	
 	
-	@Override
-	public String toString() {
-		return "ShiftConfig [id=" + id + ", startTime=" + startTime + ", endTime=" + endTime + ", weekdays=" + weekdays
-				+ ", numberOfEmployees=" + numberOfEmployees + ", userId=" + userId + "]";
+
+
+	public int getId() {
+		return id;
 	}
+
+
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+
+
+	public int getStartTime() {
+		return startTime;
+	}
+
+
+
+
+	public void setStartTime(int startTime) {
+		this.startTime = startTime;
+	}
+
+
+
+
+	public int getEndTime() {
+		return endTime;
+	}
+
+
+
+
+	public void setEndTime(int endTime) {
+		this.endTime = endTime;
+	}
+
+
+
+
+	public WeekDays getWeekdays() {
+		return weekdays;
+	}
+
+
+
+
+	public void setWeekdays(WeekDays weekdays) {
+		this.weekdays = weekdays;
+	}
+
+
+
+
+	public int getNumberOfEmployees() {
+		return numberOfEmployees;
+	}
+
+
+
+
+	public void setNumberOfEmployees(int numberOfEmployees) {
+		this.numberOfEmployees = numberOfEmployees;
+	}
+
+
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
 
 
 	@Override
@@ -44,10 +126,12 @@ public class ShiftConfig {
 		result = prime * result + id;
 		result = prime * result + numberOfEmployees;
 		result = prime * result + startTime;
-		result = prime * result + userId;
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		result = prime * result + ((weekdays == null) ? 0 : weekdays.hashCode());
 		return result;
 	}
+
+
 
 
 	@Override
@@ -67,7 +151,10 @@ public class ShiftConfig {
 			return false;
 		if (startTime != other.startTime)
 			return false;
-		if (userId != other.userId)
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
 			return false;
 		if (weekdays == null) {
 			if (other.weekdays != null)
@@ -78,75 +165,29 @@ public class ShiftConfig {
 	}
 
 
-	public int getId() {
-		return id;
+
+
+	@Override
+	public String toString() {
+		return "ShiftConfig [id=" + id + ", startTime=" + startTime + ", endTime=" + endTime + ", weekdays=" + weekdays
+				+ ", numberOfEmployees=" + numberOfEmployees + ", user=" + user + "]";
 	}
 
 
-	public void setId(int id) {
-		this.id = id;
-	}
 
-
-	public int getStartTime() {
-		return startTime;
-	}
-
-
-	public void setStartTime(int startTime) {
-		this.startTime = startTime;
-	}
-
-
-	public int getEndTime() {
-		return endTime;
-	}
-
-
-	public void setEndTime(int endTime) {
-		this.endTime = endTime;
-	}
-
-
-	public WeekDays getWeekdays() {
-		return weekdays;
-	}
-
-
-	public void setWeekdays(WeekDays weekdays) {
-		this.weekdays = weekdays;
-	}
-
-
-	public int getNumberOfEmployees() {
-		return numberOfEmployees;
-	}
-
-
-	public void setNumberOfEmployees(int numberOfEmployees) {
-		this.numberOfEmployees = numberOfEmployees;
-	}
-
-
-	public int getUserId() {
-		return userId;
-	}
-
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
 
 	public ShiftConfig(int id, @NotNull int startTime, @NotNull int endTime, @NotNull WeekDays weekdays,
-			@NotNull int numberOfEmployees, int userId) {
+			@NotNull int numberOfEmployees, User user) {
 		super();
 		this.id = id;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.weekdays = weekdays;
 		this.numberOfEmployees = numberOfEmployees;
-		this.userId = userId;
+		this.user = user;
 	}
+
+
 
 
 	public ShiftConfig() {

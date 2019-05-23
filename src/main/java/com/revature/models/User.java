@@ -6,8 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity(name = "people")
 public class User {
@@ -16,6 +18,12 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
 	private int id;
+	
+	@NotNull
+	@OneToOne
+	@JoinColumn(name = "cred_id")
+	@Autowired
+	private Credentials credentials;
 	
 	@NotNull
 	private String firstName;

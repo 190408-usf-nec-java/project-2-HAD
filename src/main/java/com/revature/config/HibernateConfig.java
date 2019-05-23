@@ -13,10 +13,13 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.revature.models.Credentials;
 import com.revature.models.Day;
 import com.revature.models.Employee;
 import com.revature.models.Shift;
+import com.revature.models.ShiftConfig;
 import com.revature.models.Week;
+import com.revature.models.WeekDays;
 import com.revature.models.User;
 
 @Configuration
@@ -37,9 +40,9 @@ public class HibernateConfig {
 		LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 		factoryBean.setConfigLocation(new ClassPathResource("hibernate.cfg.xml"));
 		
-		factoryBean.setAnnotatedClasses(Shift.class, Employee.class, Day.class, Week.class);
-		factoryBean.setAnnotatedClasses(Shift.class, Employee.class, User.class);
-		
+		factoryBean.setAnnotatedClasses(Shift.class, Employee.class, Day.class, Week.class,
+										ShiftConfig.class, Credentials.class, User.class, 
+										WeekDays.class);
 		factoryBean.setDataSource(getDataSource());
 		
 		return factoryBean;

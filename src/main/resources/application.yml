@@ -1,11 +1,15 @@
 server:
   port: 8081
 
+
 spring:
   datasource:
     username: ${JDBC_USERNAME}
     password: ${JDBC_PASSWORD}
     url: ${JDBC_URL}
   jpa:
+    properties:      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
     hibernate:
       ddl-auto: update
