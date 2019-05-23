@@ -23,7 +23,7 @@ public class CredentialsRepository {
 		String hql = "FROM Credentials c WHERE username = :user";
 		Session session = sf.getCurrentSession();
 		credentials = session.createQuery(hql, Credentials.class)
-							.setParameter(1, credentials.getUsername(), StringType.INSTANCE)
+							.setParameter("user", credentials.getUsername(), StringType.INSTANCE)
 							.uniqueResult();
 		return credentials;
 	}

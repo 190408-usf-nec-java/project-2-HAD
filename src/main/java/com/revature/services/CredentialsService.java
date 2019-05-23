@@ -27,10 +27,12 @@ public class CredentialsService {
 	
 	public Users login(Credentials credentials) {
 		Credentials checkCred = credRepo.getLogin(credentials);
-		if(credentials == null) {
+		if(checkCred == null) {
 			throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
 		}
+		
 		credentials = CredentialsService.hashPassword(credentials);
+		System.out.println(credentials);
 		if(checkCred.getHashedPassword().contentEquals(credentials.getHashedPassword())) {
 			return credentials.getUser();
 		}else {
