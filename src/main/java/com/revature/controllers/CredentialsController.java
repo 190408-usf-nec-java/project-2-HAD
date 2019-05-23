@@ -38,6 +38,7 @@ public class CredentialsController {
 		cred = CredentialsService.hashPassword(cred);
 		credentialsService.addCredentials(cred);
 		return "added user";
+		// adding a comment to test github
 	}
 	@ExceptionHandler(HttpClientErrorException.class)
 	public ResponseEntity<String> handleClientError(HttpClientErrorException e) {
