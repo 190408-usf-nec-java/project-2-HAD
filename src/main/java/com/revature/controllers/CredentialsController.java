@@ -3,6 +3,7 @@ package com.revature.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,14 @@ public class CredentialsController {
 	public Users login(@RequestBody Credentials credentials) {
 		Users user = credentialsService.login(credentials);
 		return user;
+	}
+	@GetMapping("add")
+	public String add() {
+		Users user = new Users(1, "Monty", "Python", "monty@python.org", 2);
+		Credentials cred = new Credentials(1, "hamsterparty".toCharArray(), null ,"MontyPython", user);
+		cred = CredentialsService.hashPassword(cred);
+		credentialsService.addCredentials(cred);
+		return "added user";
 	}
 	@ExceptionHandler(HttpClientErrorException.class)
 	public ResponseEntity<String> handleClientError(HttpClientErrorException e) {

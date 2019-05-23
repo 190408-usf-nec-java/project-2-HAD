@@ -20,13 +20,7 @@ public class Users {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
-	private int id;
-	
-	@NotNull
-	@OneToOne
-	@JoinColumn(name = "cred_id")
-	@Autowired
-	private Credentials credentials;
+	private int user_id;
 	
 	@NotNull
 	private String firstName;
@@ -41,15 +35,15 @@ public class Users {
 	private int role;
 	
 	@OneToMany
-	@JoinColumn(name = "user_id")
+	@Column(name = "shifts")
 	private List<ShiftConfig> shiftConfigs;
 
 	public int getId() {
-		return id;
+		return user_id;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.user_id = id;
 	}
 
 	public String getFirstName() {
@@ -90,7 +84,7 @@ public class Users {
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + id;
+		result = prime * result + user_id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + role;
 		return result;
@@ -115,7 +109,7 @@ public class Users {
 				return false;
 		} else if (!firstName.equals(other.firstName))
 			return false;
-		if (id != other.id)
+		if (user_id != other.user_id)
 			return false;
 		if (lastName == null) {
 			if (other.lastName != null)
@@ -129,13 +123,13 @@ public class Users {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", role="
+		return "User [id=" + user_id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", role="
 				+ role + "]";
 	}
 
 	public Users(int id, @NotNull String firstName, @NotNull String lastName, @NotNull String email, @NotNull int role) {
 		super();
-		this.id = id;
+		this.user_id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;

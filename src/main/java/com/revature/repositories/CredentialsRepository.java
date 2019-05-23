@@ -27,5 +27,11 @@ public class CredentialsRepository {
 							.uniqueResult();
 		return credentials;
 	}
+
+	public void createLogin(Credentials cred) {
+		Session session = sf.getCurrentSession();
+		session.save(cred.getUser());
+		session.save(cred);
+	}
 	
 }

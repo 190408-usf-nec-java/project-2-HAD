@@ -767,13 +767,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var src_app_services_login_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/login.service */ "./src/app/services/login.service.ts");
 /* harmony import */ var src_app_classes_users__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/classes/users */ "./src/app/classes/users.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
 
 
 
 
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(loginService) {
+    function LoginComponent(loginService, router) {
         this.loginService = loginService;
+        this.router = router;
         this.username = '';
         this.password = '';
         this.lastStatus = 200;
@@ -783,6 +786,7 @@ var LoginComponent = /** @class */ (function () {
         this.loginService.currentUser = new src_app_classes_users__WEBPACK_IMPORTED_MODULE_3__["Users"]('Amna', null, null, null, 1, null);
         this.loginResponse = this.loginService.$loginStatus.subscribe(function (status) {
             if (status === 200) {
+                _this.router.navigateByUrl('shifts');
             }
             else {
                 _this.lastStatus = status;
@@ -825,7 +829,7 @@ var LoginComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./login.component.html */ "./src/app/components/login/login.component.html"),
             styles: [__webpack_require__(/*! ./login.component.css */ "./src/app/components/login/login.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_login_service__WEBPACK_IMPORTED_MODULE_2__["LoginService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_login_service__WEBPACK_IMPORTED_MODULE_2__["LoginService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
     ], LoginComponent);
     return LoginComponent;
 }());
