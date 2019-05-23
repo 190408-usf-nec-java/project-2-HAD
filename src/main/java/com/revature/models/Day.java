@@ -1,12 +1,12 @@
 package com.revature.models;
 
+import java.time.DayOfWeek;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
@@ -18,7 +18,7 @@ public class Day {
 	private int id;
 	
 	@NotNull
-	private String name;
+	private DayOfWeek name;
 	
 	@NotNull
 	private String date;
@@ -34,11 +34,11 @@ public class Day {
 		this.id = id;
 	}
 
-	public String getName() {
+	public DayOfWeek getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(DayOfWeek name) {
 		this.name = name;
 	}
 
@@ -103,7 +103,7 @@ public class Day {
 		return "Day [id=" + id + ", name=" + name + ", date=" + date + ", shifts=" + shifts + "]";
 	}
 
-	public Day(int id, @NotNull String name, @NotNull String date, List<Shift> shifts) {
+	public Day(int id, @NotNull DayOfWeek name, @NotNull String date, List<Shift> shifts) {
 		super();
 		this.id = id;
 		this.name = name;

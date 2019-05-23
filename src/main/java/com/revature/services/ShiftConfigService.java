@@ -1,7 +1,10 @@
 package com.revature.services;
 
+import java.time.DayOfWeek;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -30,27 +33,28 @@ public class ShiftConfigService {
 	}
 	
 	public static Week GenerateWeek(List<ShiftConfig> configurations) {
+		Map<DayOfWeek, Day> days = new LinkedHashMap<DayOfWeek, Day>();
 		Week week = new Week();
 		Day monday = new Day();
-		monday.setName("Monday");
+		monday.setName(DayOfWeek.MONDAY);
 		monday.setShifts(new ArrayList<Shift>());
 		Day tuesday = new Day();
-		tuesday.setName("Tuesday");
+		tuesday.setName(DayOfWeek.TUESDAY);
 		tuesday.setShifts(new ArrayList<Shift>());
 		Day wednesday = new Day();
-		wednesday.setName("Wednesday");
+		wednesday.setName(DayOfWeek.WEDNESDAY);
 		wednesday.setShifts(new ArrayList<Shift>());
 		Day thursday = new Day();
-		thursday.setName("Thursday");
+		thursday.setName(DayOfWeek.THURSDAY);
 		thursday.setShifts(new ArrayList<Shift>());
 		Day friday = new Day();
-		friday.setName("Friday");
+		friday.setName(DayOfWeek.FRIDAY);
 		friday.setShifts(new ArrayList<Shift>());
 		Day saturday = new Day();
-		saturday.setName("Saturday");
+		saturday.setName(DayOfWeek.SATURDAY);
 		saturday.setShifts(new ArrayList<Shift>());
 		Day sunday = new Day();
-		sunday.setName("Sunday");
+		sunday.setName(DayOfWeek.SUNDAY);
 		sunday.setShifts(new ArrayList<Shift>());
 		configurations.forEach(config -> {
 			Shift shift = new Shift();
@@ -86,14 +90,13 @@ public class ShiftConfigService {
 				shifts.add(shift);
 			}
 		});
-		List<Day> days = new ArrayList<Day>();
-		days.add(monday);
-		days.add(tuesday);
-		days.add(wednesday);
-		days.add(thursday);
-		days.add(friday);
-		days.add(saturday);
-		days.add(sunday);
+		days.put(monday.getName(), monday);
+		days.put(tuesday.getName(), tuesday);
+		days.put(wednesday.getName(), wednesday);
+		days.put(thursday.getName(), thursday);
+		days.put(friday.getName(), friday);
+		days.put(saturday.getName(), saturday);
+		days.put(saturday.getName(), sunday);
 		week.setDays(days);
 		return week;
 	}
