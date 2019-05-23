@@ -1,0 +1,16 @@
+2019-05-23 11:23:04 TRACE LoggingAspect:24 - Users com.revature.services.CredentialsService.login(Credentials) threw org.springframework.web.client.HttpClientErrorException: 400 BAD_REQUEST
+2019-05-23 11:25:38 TRACE LoggingAspect:24 - Users com.revature.services.CredentialsService.login(Credentials) threw org.springframework.web.client.HttpClientErrorException: 400 BAD_REQUEST
+
+2019-05-23 11:25:38 TRACE LoggingAspect:25 - Stack Trace: [Ljava.lang.StackTraceElement;@ed19091
+2019-05-23 11:32:14 TRACE LoggingAspect:24 - Users com.revature.services.CredentialsService.login(Credentials) threw org.springframework.web.client.HttpClientErrorException: 400 BAD_REQUEST
+
+2019-05-23 11:32:14 TRACE LoggingAspect:25 - Stack Trace: [Ljava.lang.StackTraceElement;@2b53d795
+2019-05-23 11:32:14 TRACE LoggingAspect:24 - Users com.revature.controllers.CredentialsController.login(Credentials) threw org.springframework.web.client.HttpClientErrorException: 400 BAD_REQUEST
+
+2019-05-23 11:32:14 TRACE LoggingAspect:25 - Stack Trace: [Ljava.lang.StackTraceElement;@53d69fd5
+2019-05-23 11:57:17 TRACE LoggingAspect:25 - Users com.revature.services.CredentialsService.login(Credentials) threw org.springframework.web.client.HttpClientErrorException: 400 BAD_REQUEST
+
+2019-05-23 11:57:53 TRACE LoggingAspect:25 - Users com.revature.services.CredentialsService.login(Credentials) threw org.springframework.web.client.HttpClientErrorException: 400 BAD_REQUEST
+
+2019-05-23 12:05:36 TRACE LoggingAspect:24 - Users com.revature.services.CredentialsService.login(Credentials) threw org.springframework.web.client.HttpClientErrorException: 400 BAD_REQUEST
+2019-05-23 12:05:36 TRACE LoggingAspect:24 - Users com.revature.controllers.CredentialsController.login(Credentials) threw org.springframework.web.client.HttpClientErrorException: 400 BAD_REQUEST
