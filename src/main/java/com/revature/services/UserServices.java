@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.models.User;
+import com.revature.models.Users;
 import com.revature.repositories.UserRepository;
 @Service
 public class UserServices {
@@ -19,16 +19,16 @@ public class UserServices {
 	public UserServices(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
-	public void createUser(User user) {
+	public void createUser(Users user) {
 		userRepository.saveUser(user);
 	}
-	public List<User> getAllUsers() {
+	public List<Users> getAllUsers() {
 		return userRepository.getAllUsers();
 	}
-	public User getUserById(int id) {
+	public Users getUserById(int id) {
 		return userRepository.getUserById(id);
 	}
-	public User deleteUserById(int id) {
+	public Users deleteUserById(int id) {
 		return userRepository.deleteUserById(id);
 	}
 

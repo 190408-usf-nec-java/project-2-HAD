@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
 
-import com.revature.models.User;
+import com.revature.models.Users;
 import com.revature.services.UserServices;
 
 @RestController
@@ -29,17 +29,17 @@ public class UserController {
 	}
 	
 	@PostMapping("")
-	public void createUser(@RequestBody User user) {
+	public void createUser(@RequestBody Users user) {
 		userServices.createUser(user);
 	}
 	
 	@GetMapping("")
-	public List<User> getAllUsers() {
+	public List<Users> getAllUsers() {
 		return userServices.getAllUsers();
 	}
 	
 	@GetMapping("/{id}")
-	public User getUserById(@PathVariable int id) {
+	public Users getUserById(@PathVariable int id) {
 		return Optional.ofNullable(this.userServices.getUserById(id))
 				.orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
 	}

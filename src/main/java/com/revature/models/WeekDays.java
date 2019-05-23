@@ -1,5 +1,6 @@
 package com.revature.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,20 +11,14 @@ import javax.validation.constraints.NotNull;
 public class WeekDays {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "weekDays_id")
 	private int id;
-	@NotNull
 	private boolean monday;
-	@NotNull
 	private boolean tuesday;
-	@NotNull
 	private boolean wednesday;
-	@NotNull
 	private boolean thursday;
-	@NotNull
 	private boolean friday;
-	@NotNull
 	private boolean saturday;
-	@NotNull
 	private boolean sunday;
 	
 	public int getId() {
