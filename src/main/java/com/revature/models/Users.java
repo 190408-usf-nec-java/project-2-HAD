@@ -45,10 +45,6 @@ public class Users {
 	@JoinColumn(name = "user_id")
 	private List<ShiftConfig> shiftConfigs;
 
-	@ManyToOne
-	@JoinColumn(name = "role_Name")
-	private Role roles;
-
 	public int getId() {
 		return id;
 	}
@@ -105,14 +101,6 @@ public class Users {
 		this.shiftConfigs = shiftConfigs;
 	}
 
-	public Role getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Role roles) {
-		this.roles = roles;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -123,7 +111,6 @@ public class Users {
 		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + role;
-		result = prime * result + ((roles == null) ? 0 : roles.hashCode());
 		result = prime * result + ((shiftConfigs == null) ? 0 : shiftConfigs.hashCode());
 		return result;
 	}
@@ -161,11 +148,6 @@ public class Users {
 			return false;
 		if (role != other.role)
 			return false;
-		if (roles == null) {
-			if (other.roles != null)
-				return false;
-		} else if (!roles.equals(other.roles))
-			return false;
 		if (shiftConfigs == null) {
 			if (other.shiftConfigs != null)
 				return false;
@@ -177,12 +159,11 @@ public class Users {
 	@Override
 	public String toString() {
 		return "Users [id=" + id + ", credentials=" + credentials + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", email=" + email + ", role=" + role + ", shiftConfigs=" + shiftConfigs + ", roles="
-				+ roles + "]";
+				+ lastName + ", email=" + email + ", role=" + role + ", shiftConfigs=" + shiftConfigs + "]";
 	}
 
 	public Users(int id, @NotNull Credentials credentials, @NotNull String firstName, @NotNull String lastName,
-			@NotNull String email, @NotNull int role, List<ShiftConfig> shiftConfigs, Role roles) {
+			@NotNull String email, @NotNull int role, List<ShiftConfig> shiftConfigs) {
 		super();
 		this.id = id;
 		this.credentials = credentials;
@@ -191,14 +172,13 @@ public class Users {
 		this.email = email;
 		this.role = role;
 		this.shiftConfigs = shiftConfigs;
-		this.roles = roles;
 	}
 
 	public Users() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
+
+
+
 }

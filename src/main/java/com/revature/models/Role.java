@@ -19,11 +19,6 @@ private int id;
 @NotNull
 private String name;
 
-@NotNull
-@OneToMany
-@JoinColumn(name = "role_Name")
-private Users users;
-
 public int getId() {
 	return id;
 }
@@ -32,12 +27,12 @@ public void setId(int id) {
 	this.id = id;
 }
 
-public Users getUsers() {
-	return users;
+public String getName() {
+	return name;
 }
 
-public void setUsers(Users users) {
-	this.users = users;
+public void setName(String name) {
+	this.name = name;
 }
 
 @Override
@@ -45,7 +40,7 @@ public int hashCode() {
 	final int prime = 31;
 	int result = 1;
 	result = prime * result + id;
-	result = prime * result + ((users == null) ? 0 : users.hashCode());
+	result = prime * result + ((name == null) ? 0 : name.hashCode());
 	return result;
 }
 
@@ -60,29 +55,30 @@ public boolean equals(Object obj) {
 	Role other = (Role) obj;
 	if (id != other.id)
 		return false;
-	if (users == null) {
-		if (other.users != null)
+	if (name == null) {
+		if (other.name != null)
 			return false;
-	} else if (!users.equals(other.users))
+	} else if (!name.equals(other.name))
 		return false;
 	return true;
 }
 
 @Override
 public String toString() {
-	return "Role [id=" + id + ", users=" + users + "]";
+	return "Role [id=" + id + ", name=" + name + "]";
 }
 
-public Role(int id, @NotNull Users users) {
+public Role(int id, @NotNull String name) {
 	super();
 	this.id = id;
-	this.users = users;
+	this.name = name;
 }
 
 public Role() {
 	super();
 	// TODO Auto-generated constructor stub
 }
+
 
 
 
