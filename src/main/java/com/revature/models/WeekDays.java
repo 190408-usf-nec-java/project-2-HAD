@@ -11,19 +11,12 @@ public class WeekDays {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@NotNull
 	private boolean monday;
-	@NotNull
 	private boolean tuesday;
-	@NotNull
 	private boolean wednesday;
-	@NotNull
 	private boolean thursday;
-	@NotNull
 	private boolean friday;
-	@NotNull
 	private boolean saturday;
-	@NotNull
 	private boolean sunday;
 	
 	public int getId() {

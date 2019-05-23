@@ -1,16 +1,19 @@
 package com.revature.models;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity(name = "people")
-public class User {
+public class Users {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +31,10 @@ public class User {
 	
 	@NotNull
 	private int role;
+	
+	@OneToMany
+	@JoinColumn(name = "user_id")
+	private List<ShiftConfig> shiftConfigs;
 
 	public int getId() {
 		return id;
@@ -89,7 +96,7 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Users other = (Users) obj;
 		if (email == null) {
 			if (other.email != null)
 				return false;
@@ -118,7 +125,7 @@ public class User {
 				+ role + "]";
 	}
 
-	public User(int id, @NotNull String firstName, @NotNull String lastName, @NotNull String email, @NotNull int role) {
+	public Users(int id, @NotNull String firstName, @NotNull String lastName, @NotNull String email, @NotNull int role) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -127,7 +134,7 @@ public class User {
 		this.role = role;
 	}
 
-	public User() {
+	public Users() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
