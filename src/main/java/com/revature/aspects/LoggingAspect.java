@@ -14,14 +14,12 @@ public class LoggingAspect {
 	
 	Logger log = Logger.getRootLogger();
 	
-	@Pointcut("execution(* com.revature.*.*.*(..))")
+	@Pointcut("execution(* com.revature.respositories.*.*(..))")
     public void allDeveloperMethods() {
     }
 	
 	@AfterThrowing(pointcut = "allDeveloperMethods()", throwing = "ex")
 	public void logging(JoinPoint jp, Exception ex) {
-		System.out.println("Exception!");
-		log.trace(jp.getSignature() + " threw " + ex + "\n");
-		log.trace("Stack Trace: " + ex.getStackTrace().toString());
+		log.trace(jp.getSignature() + " threw " + ex);
 	}
 }
