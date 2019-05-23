@@ -1,4 +1,4 @@
-package com.revature.repository;
+package com.revature.repositories;
 
 import javax.inject.Inject;
 

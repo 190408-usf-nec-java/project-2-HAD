@@ -9,8 +9,8 @@ import org.springframework.web.client.HttpClientErrorException;
 
 import com.revature.models.Credentials;
 import com.revature.models.Users;
+import com.revature.repositories.CredentialsRepository;
 import com.revature.repositories.UserRepository;
-import com.revature.repository.CredentialsRepository;
 
 @Service
 public class CredentialsService {
@@ -25,7 +25,7 @@ public class CredentialsService {
 		this.userRepository = userRepository;
 	}
 	
-	public Users login(Credentials credentials) {
+	public Users login(Credentials credentials) throws HttpClientErrorException{
 		Credentials checkCred = credRepo.getLogin(credentials);
 		if(checkCred == null) {
 			throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);

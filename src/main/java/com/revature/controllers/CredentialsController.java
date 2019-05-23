@@ -1,10 +1,13 @@
 package com.revature.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException;
 
 import com.revature.models.Credentials;
 import com.revature.models.Users;
@@ -26,5 +29,9 @@ public class CredentialsController {
 	public Users login(@RequestBody Credentials credentials) {
 		Users user = credentialsService.login(credentials);
 		return user;
+	}
+	@ExceptionHandler(HttpClientErrorException.class)
+	public ResponseEntity<String> handleClientError(HttpClientErrorException e) {
+		return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
 	}
 }
