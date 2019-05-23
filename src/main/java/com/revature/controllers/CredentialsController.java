@@ -31,6 +31,7 @@ public class CredentialsController {
 		Users user = credentialsService.login(credentials);
 		return user;
 	}
+	
 	@GetMapping("add")
 	public String add() {
 		Users user = new Users(1, "Monty", "Python", "monty@python.org", 2);
@@ -40,6 +41,15 @@ public class CredentialsController {
 		return "added user";
 		// adding a comment to test github
 	}
+	
+	@PostMapping("create")
+	public Users createCredentials(@RequestBody Credentials credentials) {
+		System.out.println(credentials);
+		credentials = CredentialsService.hashPassword(credentials);		
+		Users user = credentialsService.createCredentials(credentials);
+		return user;
+	}
+	
 	@ExceptionHandler(HttpClientErrorException.class)
 	public ResponseEntity<String> handleClientError(HttpClientErrorException e) {
 		return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());

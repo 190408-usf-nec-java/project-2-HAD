@@ -8,6 +8,7 @@ import org.hibernate.type.StringType;
 import org.springframework.stereotype.Repository;
 
 import com.revature.models.Credentials;
+import com.revature.models.Users;
 
 @Repository
 public class CredentialsRepository {
@@ -32,6 +33,13 @@ public class CredentialsRepository {
 		Session session = sf.getCurrentSession();
 		session.save(cred.getUser());
 		session.save(cred);
+	}
+
+	public Users createCredentials(Credentials credentials) {
+		Session session = sf.getCurrentSession();
+		session.save(credentials.getUser());
+		session.save(credentials);
+		return credentials.getUser();
 	}
 	
 }
