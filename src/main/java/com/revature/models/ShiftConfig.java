@@ -17,55 +17,72 @@ public class ShiftConfig {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
 	@NotNull
 	private int startTime;
+	
 	@NotNull
 	private int endTime;
+	
 	@OneToOne
-	@JoinColumn(name = "weekdays_id")
+	@JoinColumn(name = "weekDays_id")
 	private WeekDays weekdays;
+	
 	@NotNull
 	private int numberOfEmployees;
+	
 	@ManyToOne
 	@JoinColumn(name = "users_id")
 	private Users users;
-	
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public int getStartTime() {
 		return startTime;
 	}
+
 	public void setStartTime(int startTime) {
 		this.startTime = startTime;
 	}
+
 	public int getEndTime() {
 		return endTime;
 	}
+
 	public void setEndTime(int endTime) {
 		this.endTime = endTime;
 	}
+
 	public WeekDays getWeekdays() {
 		return weekdays;
 	}
+
 	public void setWeekdays(WeekDays weekdays) {
 		this.weekdays = weekdays;
 	}
+
 	public int getNumberOfEmployees() {
 		return numberOfEmployees;
 	}
+
 	public void setNumberOfEmployees(int numberOfEmployees) {
 		this.numberOfEmployees = numberOfEmployees;
 	}
-	public Users getusers() {
+
+	public Users getUsers() {
 		return users;
 	}
-	public void setusers(Users users) {
+
+	public void setUsers(Users users) {
 		this.users = users;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -78,6 +95,7 @@ public class ShiftConfig {
 		result = prime * result + ((weekdays == null) ? 0 : weekdays.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -107,12 +125,14 @@ public class ShiftConfig {
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
 		return "ShiftConfig [id=" + id + ", startTime=" + startTime + ", endTime=" + endTime + ", weekdays=" + weekdays
 				+ ", numberOfEmployees=" + numberOfEmployees + ", users=" + users + "]";
 	}
-	public ShiftConfig(int id, @NotNull int startTime, @NotNull int endTime, @NotNull WeekDays weekdays,
+
+	public ShiftConfig(int id, @NotNull int startTime, @NotNull int endTime, WeekDays weekdays,
 			@NotNull int numberOfEmployees, Users users) {
 		super();
 		this.id = id;
@@ -122,9 +142,12 @@ public class ShiftConfig {
 		this.numberOfEmployees = numberOfEmployees;
 		this.users = users;
 	}
+
 	public ShiftConfig() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	
+
 }
