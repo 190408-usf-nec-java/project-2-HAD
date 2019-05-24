@@ -29,13 +29,13 @@ public class CredentialsController {
 	@PostMapping("login")
 	public Users login(@RequestBody Credentials credentials) {
 		Users user = credentialsService.login(credentials);
-		System.out.println(credentials);
+		user.setToken(credentialsService.getToken());
 		return user;
 	}
 	
 	@GetMapping("add")
 	public String add() {
-		Users user = new Users(1, "Monty", "Python", "monty@python.org", 2);
+		Users user = new Users(1, "Monty", "Python", "monty@python.org", 2, null, null);
 		Credentials cred = new Credentials(1, "hamsterparty".toCharArray(), null ,"MontyPython", user);
 		cred = CredentialsService.hashPassword(cred);
 		credentialsService.addCredentials(cred);
