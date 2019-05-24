@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import java.security.MessageDigest;
+import java.security.SecureRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,9 +32,9 @@ public class CredentialsService {
 			throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
 		}
 		credentials = CredentialsService.hashPassword(credentials);
-		if(checkCred.getHashedPassword().contentEquals(credentials.getHashedPassword())) {
+		if (checkCred.getHashedPassword().equals(credentials.getHashedPassword())) {
 			return checkCred.getUser();
-		}else {
+		} else {
 			throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
 		}
 	}
@@ -50,7 +51,9 @@ public class CredentialsService {
 			for (int i = 0; i < bytes.length; i++) {
 				sb2.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
 			}
+			System.out.println("Hashed Pass");
 			credentials.setHashedPassword(sb2.toString());
+			System.out.println(credentials);
 		} catch (Exception e) {
 
 		}
@@ -62,6 +65,22 @@ public class CredentialsService {
 	}
 	public Users createCredentials(Credentials credentials) {
 		return credRepo.createCredentials(credentials);
+	}
+
+	public String getToken() {
+		StringBuilder sb = new StringBuilder();
+		try {
+			MessageDigest SHA256 = MessageDigest.getInstance("SHA-256");
+			byte[] bytes = new byte[20];
+			SecureRandom.getInstanceStrong().nextBytes(bytes);
+			for (int i = 0; i < bytes.length; i++) {
+				sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+			}
+
+		} catch (Exception e) {
+
+		}
+		return sb.toString();
 	}
 
 }
