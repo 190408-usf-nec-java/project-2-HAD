@@ -59,12 +59,10 @@ public class CredentialsService {
 		}
 		return credentials;
 	}
-
 	public void addCredentials(Credentials cred) {
 		credRepo.createLogin(cred);
 
 	}
-
 	public Users createCredentials(Credentials credentials) {
 		return credRepo.createCredentials(credentials);
 	}
