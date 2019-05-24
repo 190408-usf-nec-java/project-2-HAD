@@ -410,7 +410,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Week", function() { return Week; });
 var Week = /** @class */ (function () {
     function Week(days, id, startDate) {
-        this.days = new Array();
+        this.days = new Map();
         this.days = days;
         this.id = id;
         this.startDate = startDate;
@@ -801,8 +801,6 @@ var LoginComponent = /** @class */ (function () {
         this.loginService.login(this.username, this.password);
         this.loginResponse = this.loginService.$loginStatus.subscribe(function (status) {
             if (status === 200) {
-                _this.cookieService.set('role', _this.loginService.currentUser.role);
-                console.log(_this.loginService.currentUser);
                 _this.router.navigateByUrl('shifts');
             }
             else {
@@ -1016,19 +1014,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ShiftpoolComponent", function() { return ShiftpoolComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var src_app_classes_week__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/classes/week */ "./src/app/classes/week.ts");
-/* harmony import */ var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ngx-bootstrap/modal */ "./node_modules/ngx-bootstrap/modal/fesm5/ngx-bootstrap-modal.js");
-/* harmony import */ var src_app_classes_users__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/classes/users */ "./src/app/classes/users.ts");
-/* harmony import */ var src_app_classes_shift__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/classes/shift */ "./src/app/classes/shift.ts");
-/* harmony import */ var src_app_services_shift_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/shift.service */ "./src/app/services/shift.service.ts");
-/* harmony import */ var src_app_classes_credentials__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/classes/credentials */ "./src/app/classes/credentials.ts");
-/* harmony import */ var src_app_classes_day__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/classes/day */ "./src/app/classes/day.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var src_app_services_login_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/app/services/login.service */ "./src/app/services/login.service.ts");
-
-
-
-
+/* harmony import */ var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ngx-bootstrap/modal */ "./node_modules/ngx-bootstrap/modal/fesm5/ngx-bootstrap-modal.js");
+/* harmony import */ var src_app_classes_shift__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/classes/shift */ "./src/app/classes/shift.ts");
+/* harmony import */ var src_app_services_shift_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/shift.service */ "./src/app/services/shift.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var src_app_services_login_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/login.service */ "./src/app/services/login.service.ts");
 
 
 
@@ -1059,7 +1049,7 @@ var ShiftpoolComponent = /** @class */ (function () {
         console.log(date);
         // this.shiftService.fetchCurrentWeekByDate(date);
         // this.currentWeek = this.shiftService.getCurrentWeek(); commented out until backend is working
-        this.currentWeek = this.formatShiftsForDisplay(this.genSampleData());
+        //this.currentWeek = this.formatShiftsForDisplay(this.genSampleData());
         this.currentWeek = this.generateFillerShifts(this.currentWeek);
         this.currentDate = date;
         this.currentWeek.days.forEach(function (day) {
@@ -1140,18 +1130,18 @@ var ShiftpoolComponent = /** @class */ (function () {
         return week;
     };
     ShiftpoolComponent.prototype.generateFillerShifts = function (week) {
-        var blankShift = new src_app_classes_shift__WEBPACK_IMPORTED_MODULE_5__["Shift"](0, 0, 1, null, 0, true);
+        var blankShift = new src_app_classes_shift__WEBPACK_IMPORTED_MODULE_3__["Shift"](0, 0, 1, null, 0, true);
         week.days.forEach(function (day) {
             var emptyShifts = new Array();
             if (day.shifts !== undefined) {
                 if (day.shifts[0].startTime !== 0) {
-                    emptyShifts.push(new src_app_classes_shift__WEBPACK_IMPORTED_MODULE_5__["Shift"](0, 0, day.shifts[0].startTime, null, 0, true));
+                    emptyShifts.push(new src_app_classes_shift__WEBPACK_IMPORTED_MODULE_3__["Shift"](0, 0, day.shifts[0].startTime, null, 0, true));
                 }
             }
             if (day.shifts !== undefined) {
                 for (var i = 1; i < day.shifts.length; i++) {
                     if (day.shifts[i - 1].endTime !== day.shifts[i].startTime) {
-                        emptyShifts.push(new src_app_classes_shift__WEBPACK_IMPORTED_MODULE_5__["Shift"](0, day.shifts[i - 1].endTime, day.shifts[i].startTime, null, 0, true));
+                        emptyShifts.push(new src_app_classes_shift__WEBPACK_IMPORTED_MODULE_3__["Shift"](0, day.shifts[i - 1].endTime, day.shifts[i].startTime, null, 0, true));
                     }
                 }
             }
@@ -1207,44 +1197,14 @@ var ShiftpoolComponent = /** @class */ (function () {
     ShiftpoolComponent.prototype.isChanged = function () {
         return this.isitChanged;
     };
-    // 768 is small breakpoint for bootstrap
-    ShiftpoolComponent.prototype.genSampleData = function () {
-        var bob = new src_app_classes_users__WEBPACK_IMPORTED_MODULE_4__["Users"]('Bob', 'Sather', 'bobsather@gmail.com', 'employee', 1, new src_app_classes_credentials__WEBPACK_IMPORTED_MODULE_7__["Credentials"]('billyboy', 'aoishgoihsgohap dhgap0sygsadgh', 'bobsath'));
-        var martha = new src_app_classes_users__WEBPACK_IMPORTED_MODULE_4__["Users"]('Martha', 'Stuart', 'martha@margo.wiz', 'employee', 2, new src_app_classes_credentials__WEBPACK_IMPORTED_MODULE_7__["Credentials"]('cookingiscool', 'aosihgoisahdpgoihaspdoigh', 'marthathecook'));
-        var monty = new src_app_classes_users__WEBPACK_IMPORTED_MODULE_4__["Users"]('Monty', 'Python', 'monty@python.com', 'employee', 3, new src_app_classes_credentials__WEBPACK_IMPORTED_MODULE_7__["Credentials"]('hamsterparty', 'aosihgoisahdpgoihaspdoigh', 'montypython'));
-        var james = new src_app_classes_users__WEBPACK_IMPORTED_MODULE_4__["Users"]('James', 'Bond', 'bonejamesbond@bond.com', 'employee', 4, new src_app_classes_credentials__WEBPACK_IMPORTED_MODULE_7__["Credentials"]('shakennotstirred', 'aosihgoisahdpgoihaspdoigh', 'jamesbond'));
-        var emps = new Array(martha, bob);
-        var emps2 = new Array(monty, james);
-        var fShift = new src_app_classes_shift__WEBPACK_IMPORTED_MODULE_5__["Shift"](1, 9, 12, emps, 2);
-        var nshift = new src_app_classes_shift__WEBPACK_IMPORTED_MODULE_5__["Shift"](3, 3, 16, emps2, 2);
-        var sshift = new src_app_classes_shift__WEBPACK_IMPORTED_MODULE_5__["Shift"](2, 17, 20, emps2, 2);
-        var tshift = new src_app_classes_shift__WEBPACK_IMPORTED_MODULE_5__["Shift"](0, 1, 9, emps, 2);
-        var shifts1 = new Array(sshift, fShift, tshift);
-        var shifts2 = new Array(nshift);
-        var shifts3 = new Array(sshift, fShift, tshift);
-        var shifts4 = new Array(nshift);
-        var shifts5 = new Array(sshift, fShift, tshift);
-        var shifts6 = new Array(sshift, fShift, tshift);
-        var shifts7 = new Array(sshift, fShift, tshift);
-        var monday = new src_app_classes_day__WEBPACK_IMPORTED_MODULE_8__["Day"](new Date('5/6/2019'), shifts6);
-        var tuesday = new src_app_classes_day__WEBPACK_IMPORTED_MODULE_8__["Day"](new Date('5/7/2019'), shifts5);
-        var wednesday = new src_app_classes_day__WEBPACK_IMPORTED_MODULE_8__["Day"](new Date('5/8/2019'), shifts3);
-        var thursday = new src_app_classes_day__WEBPACK_IMPORTED_MODULE_8__["Day"](new Date('5/9/2019'), shifts7);
-        var friday = new src_app_classes_day__WEBPACK_IMPORTED_MODULE_8__["Day"](new Date('5/10/2019'), shifts1);
-        var saturday = new src_app_classes_day__WEBPACK_IMPORTED_MODULE_8__["Day"](new Date('5/11/2019'), shifts2);
-        var sunday = new src_app_classes_day__WEBPACK_IMPORTED_MODULE_8__["Day"](new Date('5/12/2019'), shifts4);
-        var days = new Array(monday, tuesday, wednesday, thursday, friday, saturday, sunday);
-        var week = new src_app_classes_week__WEBPACK_IMPORTED_MODULE_2__["Week"](days, 1, new Date(days[0].date));
-        return week;
-    };
     ShiftpoolComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-shiftpool',
             template: __webpack_require__(/*! ./shiftpool.component.html */ "./src/app/components/shiftpool/shiftpool.component.html"),
             styles: [__webpack_require__(/*! ./shiftpool.component.css */ "./src/app/components/shiftpool/shiftpool.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_shift_service__WEBPACK_IMPORTED_MODULE_6__["ShiftService"], ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_3__["BsModalService"], _angular_router__WEBPACK_IMPORTED_MODULE_9__["Router"],
-            src_app_services_login_service__WEBPACK_IMPORTED_MODULE_10__["LoginService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_shift_service__WEBPACK_IMPORTED_MODULE_4__["ShiftService"], ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_2__["BsModalService"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"],
+            src_app_services_login_service__WEBPACK_IMPORTED_MODULE_6__["LoginService"]])
     ], ShiftpoolComponent);
     return ShiftpoolComponent;
 }());
@@ -1271,7 +1231,7 @@ module.exports = ".day{\r\n    height: 72vh;\r\n    width: 100%;\r\n    margin: 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"col-12 bg-secondary\">\r\n  <div class=\"col-12 d-flex flex-row justify-content-between\">\r\n    <button click=\"previous()\" class=\"btn btn-light\">Previous {{ weekOrDay }}</button>\r\n    <h1 class=\"h1 text-center text-white\">Shifts</h1>\r\n    <button (click)=\"next()\" class=\"btn btn-light\">Next {{ weekOrDay }}</button>\r\n  </div>\r\n  <div class=\"d-flex flex-row col-12\">\r\n    <div class=\"col-1\"></div>\r\n    <div class=\"col-11 d-flex flex-row justify-content-between\">\r\n        <h5 *ngIf=\"isCurrentDay(0)\" class=\"day-date text-center text-white\">{{ weekdays[0] }} </h5>\r\n        <h5 *ngIf=\"isCurrentDay(1)\" class=\"day-date text-center text-white\">{{ weekdays[1] }} </h5>\r\n        <h5 *ngIf=\"isCurrentDay(2)\" class=\"day-date text-center text-white\">{{ weekdays[2] }} </h5>\r\n        <h5 *ngIf=\"isCurrentDay(3)\" class=\"day-date text-center text-white\">{{ weekdays[3] }} </h5>\r\n        <h5 *ngIf=\"isCurrentDay(4)\" class=\"day-date text-center text-white\">{{ weekdays[4] }} </h5>\r\n        <h5 *ngIf=\"isCurrentDay(5)\" class=\"day-date text-center text-white\">{{ weekdays[5] }} </h5>\r\n        <h5 *ngIf=\"isCurrentDay(6)\" class=\"day-date text-center text-white\">{{ weekdays[6] }} </h5>\r\n    </div>\r\n  </div>\r\n  <div class=\"d-flex flex-row\">\r\n    <div class=\"d-flex flex-column justify-content-between hours col-1\">\r\n      <table>\r\n        <tbody>\r\n          <tr>\r\n            <td>12a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>1a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>2a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>3a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>4a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>5a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>6a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>7a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>8a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>9a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>10a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>11a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>12p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>1p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>2p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>3p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>4p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>5p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>6p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>7p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>8p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>9p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>10p</td>\r\n          </tr>\r\n          <tr class=\"lasttr\">\r\n            <td>11p</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n    <div class=\"shifts-wrapper col-11 d-flex flex-row justify-content-between bg-light\">\r\n      <div *ngIf=\"isCurrentDay(0)\" class=\"day\">\r\n        <div *ngFor=\"let shift of currentWeek.days[0].shifts\" [class.empty]=\"shift.isEmptyShift\" class=\"shift\" \r\n          (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\"> \r\n          <ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.firstname + ' ' + employee.lastname }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"isCurrentDay(1)\" class=\"day\">\r\n        <div *ngFor=\"let shift of currentWeek.days[1].shifts\" [class.empty]=\"shift.isEmptyShift\" class=\"shift\" \r\n        (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\" >\r\n        <ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.firstname + ' ' + employee.lastname }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"isCurrentDay(2)\" class=\"day\">\r\n        <div *ngFor=\"let shift of currentWeek.days[2].shifts\" [class.empty]=\"shift.isEmptyShift\" class=\"shift\" \r\n        (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\">\r\n        <ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.firstname + ' ' + employee.lastname }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"isCurrentDay(3)\" class=\"day\">\r\n        <div *ngFor=\"let shift of currentWeek.days[3].shifts\" [class.empty]=\"shift.isEmptyShift\" class=\"shift\" \r\n        (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\"><ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.firstname + ' ' + employee.lastname }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"isCurrentDay(4)\" class=\"day\">\r\n        <div *ngFor=\"let shift of currentWeek.days[4].shifts\" class=\"shift\" [class.empty]=\"shift.isEmptyShift\"\r\n        (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\"><ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.firstname + ' ' + employee.lastname }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"isCurrentDay(5)\" class=\"day\">\r\n        <div *ngFor=\"let shift of currentWeek.days[5].shifts\" class=\"shift\" [class.empty]=\"shift.isEmptyShift\"\r\n        (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\"><ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.firstname + ' ' + employee.lastname }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"isCurrentDay(6)\" class=\"day\">\r\n        <div *ngFor=\"let shift of currentWeek.days[6].shifts\" class=\"shift\" [class.empty]=\"shift.isEmptyShift\"\r\n        (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\"><ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.firstname + ' ' + employee.lastname }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <ng-template #template>\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title pull-left\">Shift</h4>\r\n        <button type=\"button\" class=\"close pull-right\" aria-label=\"Close\" (click)=\"modalRef.hide()\">\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <div class=\"col-12\">Start Time: {{ clickedShift.startTime }}</div>\r\n        <div class=\"col-12\">End Time: {{ clickedShift.endTime }}</div>\r\n        <div *ngFor=\"let employee of clickedShift.employees\" class=\"col-12 d-flex justify-content-between\">\r\n          Employee: {{ employee.credentials.username }}\r\n          <button *ngIf=\"isitEditMode()\" (click)=\"delete(employee.credentials.username)\" class=\"btn btn-danger\">Delete</button>\r\n        </div>\r\n        <div class=\"form-group\" *ngIf=\"isManager() && isitEditMode()\">\r\n          <select (change)=\"changeEmployee($event)\" class=\"form-control\">\r\n            <option [style.display]=\"employeeIsAlreadyAssigned(employee)\"\r\n              *ngFor=\"let employee of currentEmployees\">\r\n              {{ employee.credentials.username }}\r\n            </option>\r\n          </select>\r\n        </div>\r\n        <button (click)=\"edit()\" *ngIf=\"!isitEditMode()\" class=\"btn btn-danger\">Edit</button>\r\n        <button (click)=\"save()\" *ngIf=\"isitEditMode()\" class=\"btn btn-success\">Save</button>\r\n      </div>\r\n    </ng-template>\r\n  </div>\r\n  <div class=\"d-flex justify-content-center col-12\">\r\n    <button class=\"btn btn-success\" click=\"submitWeek()\" [disabled]=\"!isChanged()\">Submit</button>\r\n  </div>\r\n</section>"
+module.exports = "<section class=\"col-12 bg-secondary\">\r\n  <div class=\"col-12 d-flex flex-row justify-content-between\">\r\n    <button click=\"previous()\" class=\"btn btn-light\">Previous {{ weekOrDay }}</button>\r\n    <h1 class=\"h1 text-center text-white\">Shifts</h1>\r\n    <button (click)=\"next()\" class=\"btn btn-light\">Next {{ weekOrDay }}</button>\r\n  </div>\r\n  <div class=\"d-flex flex-row col-12\">\r\n    <div class=\"col-1\"></div>\r\n    <div class=\"col-11 d-flex flex-row justify-content-between\">\r\n        <h5 *ngIf=\"isCurrentDay(0)\" class=\"day-date text-center text-white\">{{ weekdays[0] }} </h5>\r\n        <h5 *ngIf=\"isCurrentDay(1)\" class=\"day-date text-center text-white\">{{ weekdays[1] }} </h5>\r\n        <h5 *ngIf=\"isCurrentDay(2)\" class=\"day-date text-center text-white\">{{ weekdays[2] }} </h5>\r\n        <h5 *ngIf=\"isCurrentDay(3)\" class=\"day-date text-center text-white\">{{ weekdays[3] }} </h5>\r\n        <h5 *ngIf=\"isCurrentDay(4)\" class=\"day-date text-center text-white\">{{ weekdays[4] }} </h5>\r\n        <h5 *ngIf=\"isCurrentDay(5)\" class=\"day-date text-center text-white\">{{ weekdays[5] }} </h5>\r\n        <h5 *ngIf=\"isCurrentDay(6)\" class=\"day-date text-center text-white\">{{ weekdays[6] }} </h5>\r\n    </div>\r\n  </div>\r\n  <div class=\"d-flex flex-row\">\r\n    <div class=\"d-flex flex-column justify-content-between hours col-1\">\r\n      <table>\r\n        <tbody>\r\n          <tr>\r\n            <td>12a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>1a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>2a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>3a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>4a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>5a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>6a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>7a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>8a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>9a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>10a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>11a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>12p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>1p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>2p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>3p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>4p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>5p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>6p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>7p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>8p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>9p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>10p</td>\r\n          </tr>\r\n          <tr class=\"lasttr\">\r\n            <td>11p</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n    <div class=\"shifts-wrapper col-11 d-flex flex-row justify-content-between bg-light\">\r\n      <div *ngIf=\"isCurrentDay(0)\" class=\"day\">\r\n        <div *ngFor=\"let shift of currentWeek.days\" [class.empty]=\"shift.isEmptyShift\" class=\"shift\" \r\n          (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\"> \r\n          <ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.firstname + ' ' + employee.lastname }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"isCurrentDay(1)\" class=\"day\">\r\n        <div *ngFor=\"let shift of currentWeek.days\" [class.empty]=\"shift.isEmptyShift\" class=\"shift\" \r\n        (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\" >\r\n        <ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.firstname + ' ' + employee.lastname }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"isCurrentDay(2)\" class=\"day\">\r\n        <div *ngFor=\"let shift of currentWeek.days\" [class.empty]=\"shift.isEmptyShift\" class=\"shift\" \r\n        (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\">\r\n        <ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.firstname + ' ' + employee.lastname }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"isCurrentDay(3)\" class=\"day\">\r\n        <div *ngFor=\"let shift of currentWeek.days\" [class.empty]=\"shift.isEmptyShift\" class=\"shift\" \r\n        (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\"><ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.firstname + ' ' + employee.lastname }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"isCurrentDay(4)\" class=\"day\">\r\n        <div *ngFor=\"let shift of currentWeek.days\" class=\"shift\" [class.empty]=\"shift.isEmptyShift\"\r\n        (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\"><ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.firstname + ' ' + employee.lastname }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"isCurrentDay(5)\" class=\"day\">\r\n        <div *ngFor=\"let shift of currentWeek.days\" class=\"shift\" [class.empty]=\"shift.isEmptyShift\"\r\n        (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\"><ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.firstname + ' ' + employee.lastname }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"isCurrentDay(6)\" class=\"day\">\r\n        <div *ngFor=\"let shift of currentWeek.days\" class=\"shift\" [class.empty]=\"shift.isEmptyShift\"\r\n        (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\"><ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.firstname + ' ' + employee.lastname }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <ng-template #template>\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title pull-left\">Shift</h4>\r\n        <button type=\"button\" class=\"close pull-right\" aria-label=\"Close\" (click)=\"modalRef.hide()\">\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <div class=\"col-12\">Start Time: {{ clickedShift.startTime }}</div>\r\n        <div class=\"col-12\">End Time: {{ clickedShift.endTime }}</div>\r\n        <div *ngFor=\"let employee of clickedShift.employees\" class=\"col-12 d-flex justify-content-between\">\r\n          Employee: {{ employee.credentials.username }}\r\n          <button *ngIf=\"isitEditMode()\" (click)=\"delete(employee.credentials.username)\" class=\"btn btn-danger\">Delete</button>\r\n        </div>\r\n        <div class=\"form-group\" *ngIf=\"isManager() && isitEditMode()\">\r\n          <select (change)=\"changeEmployee($event)\" class=\"form-control\">\r\n            <option [style.display]=\"employeeIsAlreadyAssigned(employee)\"\r\n              *ngFor=\"let employee of currentEmployees\">\r\n              {{ employee.credentials.username }}\r\n            </option>\r\n          </select>\r\n        </div>\r\n        <button (click)=\"edit()\" *ngIf=\"!isitEditMode()\" class=\"btn btn-danger\">Edit</button>\r\n        <button (click)=\"save()\" *ngIf=\"isitEditMode()\" class=\"btn btn-success\">Save</button>\r\n      </div>\r\n    </ng-template>\r\n  </div>\r\n  <div class=\"d-flex justify-content-center col-12\">\r\n    <button class=\"btn btn-success\" click=\"submitWeek()\" [disabled]=\"!isChanged()\">Submit</button>\r\n  </div>\r\n</section>"
 
 /***/ }),
 
@@ -1289,15 +1249,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var src_app_classes_week__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/classes/week */ "./src/app/classes/week.ts");
 /* harmony import */ var src_app_services_shift_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/shift.service */ "./src/app/services/shift.service.ts");
-/* harmony import */ var src_app_classes_users__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/classes/users */ "./src/app/classes/users.ts");
-/* harmony import */ var src_app_classes_shift__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/classes/shift */ "./src/app/classes/shift.ts");
-/* harmony import */ var src_app_classes_credentials__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/classes/credentials */ "./src/app/classes/credentials.ts");
-/* harmony import */ var src_app_classes_day__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/classes/day */ "./src/app/classes/day.ts");
-/* harmony import */ var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ngx-bootstrap/modal */ "./node_modules/ngx-bootstrap/modal/fesm5/ngx-bootstrap-modal.js");
-/* harmony import */ var src_app_services_login_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/services/login.service */ "./src/app/services/login.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-
-
+/* harmony import */ var src_app_classes_shift__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/classes/shift */ "./src/app/classes/shift.ts");
+/* harmony import */ var src_app_classes_day__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/classes/day */ "./src/app/classes/day.ts");
+/* harmony import */ var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ngx-bootstrap/modal */ "./node_modules/ngx-bootstrap/modal/fesm5/ngx-bootstrap-modal.js");
+/* harmony import */ var src_app_services_login_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/services/login.service */ "./src/app/services/login.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 
 
 
@@ -1313,6 +1269,8 @@ var ShiftsComponent = /** @class */ (function () {
         this.modalService = modalService;
         this.loginService = loginService;
         this.router = router;
+        this.loaded = false;
+        this.currentWeek = { days: null, id: null, startDate: null };
         this.currentDay = 0;
         this.config = {
             backdrop: false
@@ -1327,24 +1285,41 @@ var ShiftsComponent = /** @class */ (function () {
         }
         var today = new Date(Date.now());
         var date = this.formartToUsableDate(today);
-        console.log(date);
-        // this.shiftService.fetchCurrentWeekByDate(date);
-        // this.currentWeek = this.shiftService.getCurrentWeek(); commented out until backend is working
-        this.currentWeek = this.formatShiftsForDisplay(this.genSampleData());
-        this.currentWeek = this.generateFillerShifts(this.currentWeek);
         this.currentDate = date;
-        this.currentWeek.days.forEach(function (day) {
-            _this.weekdays.push(_this.formartToUsableDate(day.date));
-        });
         if (this.isSmallScreen()) {
             this.weekOrDay = 'Day';
         }
         else {
             this.weekOrDay = 'Week';
         }
+        this.currentWeek = this.genSampleData();
+        console.log(this.currentWeek.days);
+        this.shiftService.fetchCurrentWeekByUser(2);
+        this.shiftService.$shiftStatus.subscribe(function (status) {
+            if (status === 200) {
+                _this.loaded = true;
+                console.log('before populate: ');
+                console.log(_this.currentWeek);
+                _this.populateShifts();
+            }
+            else {
+                console.log('There was an error');
+            }
+        });
+        // this.currentWeek = this.formatShiftsForDisplay(this.genSampleData());
+    };
+    ShiftsComponent.prototype.populateShifts = function () {
+        var _this = this;
+        this.currentWeek = this.shiftService.getCurrentWeek();
+        console.log('populateShifts: ');
+        console.log(this.currentWeek);
+        this.currentWeek = this.generateFillerShifts(this.currentWeek);
+        this.currentWeek.days.forEach(function (day) {
+            _this.weekdays.push(_this.formartToUsableDate(day.date));
+        });
         this.shiftService.setEmployees();
-        this.currentEmployees = this.shiftService.getEmployees();
-        console.log(this.currentEmployees);
+        // this.currentEmployees = this.shiftService.getEmployees();
+        // console.log(this.currentEmployees);
     };
     ShiftsComponent.prototype.openModal = function (template, shift) {
         this.clickedShift = shift;
@@ -1411,18 +1386,20 @@ var ShiftsComponent = /** @class */ (function () {
         return week;
     };
     ShiftsComponent.prototype.generateFillerShifts = function (week) {
-        var blankShift = new src_app_classes_shift__WEBPACK_IMPORTED_MODULE_5__["Shift"](0, 0, 1, null, 0, true);
+        console.log('week = ');
+        console.log(week.days);
+        var days = this.convertToArray(week.days);
         week.days.forEach(function (day) {
             var emptyShifts = new Array();
             if (day.shifts !== undefined) {
                 if (day.shifts[0].startTime !== 0) {
-                    emptyShifts.push(new src_app_classes_shift__WEBPACK_IMPORTED_MODULE_5__["Shift"](0, 0, day.shifts[0].startTime, null, 0, true));
+                    emptyShifts.push(new src_app_classes_shift__WEBPACK_IMPORTED_MODULE_4__["Shift"](0, 0, day.shifts[0].startTime, null, 0, true));
                 }
             }
             if (day.shifts !== undefined) {
                 for (var i = 1; i < day.shifts.length; i++) {
                     if (day.shifts[i - 1].endTime !== day.shifts[i].startTime) {
-                        emptyShifts.push(new src_app_classes_shift__WEBPACK_IMPORTED_MODULE_5__["Shift"](0, day.shifts[i - 1].endTime, day.shifts[i].startTime, null, 0, true));
+                        emptyShifts.push(new src_app_classes_shift__WEBPACK_IMPORTED_MODULE_4__["Shift"](0, day.shifts[i - 1].endTime, day.shifts[i].startTime, null, 0, true));
                     }
                 }
             }
@@ -1439,6 +1416,9 @@ var ShiftsComponent = /** @class */ (function () {
     };
     ShiftsComponent.prototype.isitEditMode = function () {
         return this.isEditMode;
+    };
+    ShiftsComponent.prototype.isLoaded = function () {
+        return this.loaded;
     };
     ShiftsComponent.prototype.changeEmployee = function ($event) {
         for (var _i = 0, _a = this.currentEmployees; _i < _a.length; _i++) {
@@ -1478,34 +1458,49 @@ var ShiftsComponent = /** @class */ (function () {
     ShiftsComponent.prototype.isChanged = function () {
         return this.isitChanged;
     };
+    ShiftsComponent.prototype.convertToArray = function (map) {
+        var array = new Array();
+        map.forEach(function (day) {
+            array.push(day);
+        });
+    };
     // 768 is small breakpoint for bootstrap
+    /*genEmptyWeek(): Week {
+      const days = new Array<Day>();
+      for (let i = 0; i < 7; i++) {
+        days.push(new Day(new Date(Date.now()), new Array<Shift>()));
+      }
+      return new Week(days,  1, new Date(''));
+    }*/
     ShiftsComponent.prototype.genSampleData = function () {
-        var bob = new src_app_classes_users__WEBPACK_IMPORTED_MODULE_4__["Users"]('Bob', 'Sather', 'bobsather@gmail.com', 'employee', 1, new src_app_classes_credentials__WEBPACK_IMPORTED_MODULE_6__["Credentials"]('billyboy', 'aoishgoihsgohap dhgap0sygsadgh', 'bobsath'));
-        var martha = new src_app_classes_users__WEBPACK_IMPORTED_MODULE_4__["Users"]('Martha', 'Stuart', 'martha@margo.wiz', 'employee', 2, new src_app_classes_credentials__WEBPACK_IMPORTED_MODULE_6__["Credentials"]('cookingiscool', 'aosihgoisahdpgoihaspdoigh', 'marthathecook'));
-        var monty = new src_app_classes_users__WEBPACK_IMPORTED_MODULE_4__["Users"]('Monty', 'Python', 'monty@python.com', 'employee', 3, new src_app_classes_credentials__WEBPACK_IMPORTED_MODULE_6__["Credentials"]('hamsterparty', 'aosihgoisahdpgoihaspdoigh', 'montypython'));
-        var james = new src_app_classes_users__WEBPACK_IMPORTED_MODULE_4__["Users"]('James', 'Bond', 'bonejamesbond@bond.com', 'employee', 4, new src_app_classes_credentials__WEBPACK_IMPORTED_MODULE_6__["Credentials"]('shakennotstirred', 'aosihgoisahdpgoihaspdoigh', 'jamesbond'));
-        var emps = new Array(martha, bob);
-        var emps2 = new Array(monty, james);
-        var fShift = new src_app_classes_shift__WEBPACK_IMPORTED_MODULE_5__["Shift"](1, 9, 12, emps, 2);
-        var nshift = new src_app_classes_shift__WEBPACK_IMPORTED_MODULE_5__["Shift"](3, 3, 16, emps2, 2);
-        var sshift = new src_app_classes_shift__WEBPACK_IMPORTED_MODULE_5__["Shift"](2, 17, 20, emps2, 2);
-        var tshift = new src_app_classes_shift__WEBPACK_IMPORTED_MODULE_5__["Shift"](0, 1, 9, emps, 2);
-        var shifts1 = new Array(sshift, fShift, tshift);
-        var shifts2 = new Array(nshift);
-        var shifts3 = new Array(sshift, fShift, tshift);
-        var shifts4 = new Array(nshift);
-        var shifts5 = new Array(sshift, fShift, tshift);
-        var shifts6 = new Array(sshift, fShift, tshift);
-        var shifts7 = new Array(sshift, fShift, tshift);
-        var monday = new src_app_classes_day__WEBPACK_IMPORTED_MODULE_7__["Day"](new Date('5/6/2019'), shifts6);
-        var tuesday = new src_app_classes_day__WEBPACK_IMPORTED_MODULE_7__["Day"](new Date('5/7/2019'), shifts5);
-        var wednesday = new src_app_classes_day__WEBPACK_IMPORTED_MODULE_7__["Day"](new Date('5/8/2019'), shifts3);
-        var thursday = new src_app_classes_day__WEBPACK_IMPORTED_MODULE_7__["Day"](new Date('5/9/2019'), shifts7);
-        var friday = new src_app_classes_day__WEBPACK_IMPORTED_MODULE_7__["Day"](new Date('5/10/2019'), shifts1);
-        var saturday = new src_app_classes_day__WEBPACK_IMPORTED_MODULE_7__["Day"](new Date('5/11/2019'), shifts2);
-        var sunday = new src_app_classes_day__WEBPACK_IMPORTED_MODULE_7__["Day"](new Date('5/12/2019'), shifts4);
-        var days = new Array(monday, tuesday, wednesday, thursday, friday, saturday, sunday);
-        var week = new src_app_classes_week__WEBPACK_IMPORTED_MODULE_2__["Week"](days, 1, new Date(days[0].date));
+        /*let bob = new Users('Bob', 'Sather', 'bobsather@gmail.com', 'employee', 1,
+          new Credentials('billyboy', 'aoishgoihsgohap dhgap0sygsadgh', 'bobsath'));
+        let martha = new Users('Martha', 'Stuart', 'martha@margo.wiz', 'employee', 2,
+          new Credentials('cookingiscool', 'aosihgoisahdpgoihaspdoigh', 'marthathecook'));
+        let monty = new Users('Monty', 'Python', 'monty@python.com', 'employee', 3,
+          new Credentials('hamsterparty', 'aosihgoisahdpgoihaspdoigh', 'montypython'));
+        let james = new Users('James', 'Bond', 'bonejamesbond@bond.com', 'employee', 4,
+          new Credentials('shakennotstirred', 'aosihgoisahdpgoihaspdoigh', 'jamesbond'));*/
+        var shift = new src_app_classes_shift__WEBPACK_IMPORTED_MODULE_4__["Shift"](1, 0, 0, null, 2, true);
+        /*let nshift = new Shift(3, 3, 16, emps2, 2);
+        let sshift = new Shift(2, 17, 20, emps2, 2);
+        let tshift = new Shift(0, 1, 9, emps, 2);*/
+        var shifts1 = new Array(shift);
+        /*let shifts2 = new Array<Shift>(nshift);
+        let shifts3 = new Array<Shift>(sshift, fShift, tshift);
+        let shifts4 = new Array<Shift>(nshift);
+        let shifts5 = new Array<Shift>(sshift, fShift, tshift);
+        let shifts6 = new Array<Shift>(sshift, fShift, tshift);
+        let shifts7 = new Array<Shift>(sshift, fShift, tshift);*/
+        var monday = new src_app_classes_day__WEBPACK_IMPORTED_MODULE_5__["Day"](new Date('5/6/2019'), shifts1);
+        var tuesday = new src_app_classes_day__WEBPACK_IMPORTED_MODULE_5__["Day"](new Date('5/7/2019'), shifts1);
+        var wednesday = new src_app_classes_day__WEBPACK_IMPORTED_MODULE_5__["Day"](new Date('5/8/2019'), shifts1);
+        var thursday = new src_app_classes_day__WEBPACK_IMPORTED_MODULE_5__["Day"](new Date('5/9/2019'), shifts1);
+        var friday = new src_app_classes_day__WEBPACK_IMPORTED_MODULE_5__["Day"](new Date('5/10/2019'), shifts1);
+        var saturday = new src_app_classes_day__WEBPACK_IMPORTED_MODULE_5__["Day"](new Date('5/11/2019'), shifts1);
+        var sunday = new src_app_classes_day__WEBPACK_IMPORTED_MODULE_5__["Day"](new Date('5/12/2019'), shifts1);
+        //let days = new Map<string, Day>('MONDAY', monday, tuesday, wednesday, thursday, friday, saturday, sunday);
+        var week = new src_app_classes_week__WEBPACK_IMPORTED_MODULE_2__["Week"](/*days*/ null, 1, new Date(Date.now()));
         return week;
     };
     ShiftsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -1514,8 +1509,8 @@ var ShiftsComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./shifts.component.html */ "./src/app/components/shifts/shifts.component.html"),
             styles: [__webpack_require__(/*! ./shifts.component.css */ "./src/app/components/shifts/shifts.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_shift_service__WEBPACK_IMPORTED_MODULE_3__["ShiftService"], ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_8__["BsModalService"], src_app_services_login_service__WEBPACK_IMPORTED_MODULE_9__["LoginService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_10__["Router"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_shift_service__WEBPACK_IMPORTED_MODULE_3__["ShiftService"], ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_6__["BsModalService"], src_app_services_login_service__WEBPACK_IMPORTED_MODULE_7__["LoginService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_8__["Router"]])
     ], ShiftsComponent);
     return ShiftsComponent;
 }());
@@ -1849,9 +1844,10 @@ var LoginService = /** @class */ (function () {
             observe: 'response',
         }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (response) { return response.body; }))
             .subscribe(function (response) {
-            _this.loginStatusSubject.next(200);
             _this.currentUser = response;
+            _this.cookieService.set('role', _this.currentUser.role);
             _this.loggedIn = true;
+            _this.loginStatusSubject.next(200);
         }, function (err) {
             _this.loginStatusSubject.next(err.status);
         });
@@ -1937,6 +1933,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _classes_users__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../classes/users */ "./src/app/classes/users.ts");
 /* harmony import */ var _classes_credentials__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../classes/credentials */ "./src/app/classes/credentials.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+
 
 
 
@@ -1946,6 +1944,8 @@ __webpack_require__.r(__webpack_exports__);
 var ShiftService = /** @class */ (function () {
     function ShiftService(httpClient) {
         this.httpClient = httpClient;
+        this.shiftStatusSubject = new rxjs__WEBPACK_IMPORTED_MODULE_6__["Subject"]();
+        this.$shiftStatus = this.shiftStatusSubject.asObservable();
     }
     ShiftService.prototype.fetchNextWeek = function (currentWeek) {
         var _this = this;
@@ -1960,16 +1960,18 @@ var ShiftService = /** @class */ (function () {
         });
     };
     // This method is only run on component init
-    ShiftService.prototype.fetchCurrentWeekByDate = function (date) {
+    ShiftService.prototype.fetchCurrentWeekByUser = function (id) {
         var _this = this;
-        this.httpClient.get("http://localhost:8080/week/" + date, {
+        this.httpClient.get("http://localhost:8081/week/" + id, {
             observe: 'response',
         }).pipe(Object(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3__["map"])(function (response) { return response.body; }))
             .subscribe(function (response) {
-            // this.loginStatusSubject.next(200);
             _this.currentWeek = response;
+            console.log('Shift service: ');
+            console.log(_this.currentWeek);
+            _this.shiftStatusSubject.next(200);
         }, function (err) {
-            // this.loginStatusSubject.next(err.status);
+            _this.shiftStatusSubject.next(err.status);
         });
     };
     ShiftService.prototype.fetchPreviousWeek = function (currentWeek) {
@@ -1978,10 +1980,10 @@ var ShiftService = /** @class */ (function () {
             observe: 'response',
         }).pipe(Object(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3__["map"])(function (response) { return response.body; }))
             .subscribe(function (response) {
-            // this.loginStatusSubject.next(200);
+            _this.shiftStatusSubject.next(200);
             _this.previousWeek = response;
         }, function (err) {
-            // this.loginStatusSubject.next(err.status);
+            _this.shiftStatusSubject.next(err.status);
         });
     };
     ShiftService.prototype.getCurrentWeek = function () {

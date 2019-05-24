@@ -3,6 +3,7 @@ package com.revature.services;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,7 @@ public class CredentialsService {
 		}
 		credentials = CredentialsService.hashPassword(credentials);
 		if (checkCred.getHashedPassword().equals(credentials.getHashedPassword())) {
+			Hibernate.initialize(checkCred.getUser());
 			return checkCred.getUser();
 		} else {
 			throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
