@@ -35,7 +35,6 @@ public class Users {
 	@NotNull
 	private int role;
 	
-	@Transient
 	private String token;
 	
 	@OneToMany

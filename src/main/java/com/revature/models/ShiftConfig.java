@@ -1,5 +1,6 @@
 package com.revature.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -29,9 +31,9 @@ public class ShiftConfig {
 	private WeekDays weekdays;
 	
 	@NotNull
-	private int numberOfEmployees;
+	private long numberOfEmployees;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "users_id")
 	private Users users;
 
@@ -67,11 +69,11 @@ public class ShiftConfig {
 		this.weekdays = weekdays;
 	}
 
-	public int getNumberOfEmployees() {
+	public long getNumberOfEmployees() {
 		return numberOfEmployees;
 	}
 
-	public void setNumberOfEmployees(int numberOfEmployees) {
+	public void setNumberOfEmployees(long numberOfEmployees) {
 		this.numberOfEmployees = numberOfEmployees;
 	}
 
@@ -89,7 +91,7 @@ public class ShiftConfig {
 		int result = 1;
 		result = prime * result + endTime;
 		result = prime * result + id;
-		result = prime * result + numberOfEmployees;
+		result = prime * result + (int) (numberOfEmployees ^ (numberOfEmployees >>> 32));
 		result = prime * result + startTime;
 		result = prime * result + ((users == null) ? 0 : users.hashCode());
 		result = prime * result + ((weekdays == null) ? 0 : weekdays.hashCode());
@@ -133,7 +135,7 @@ public class ShiftConfig {
 	}
 
 	public ShiftConfig(int id, @NotNull int startTime, @NotNull int endTime, WeekDays weekdays,
-			@NotNull int numberOfEmployees, Users users) {
+			@NotNull long numberOfEmployees, Users users) {
 		super();
 		this.id = id;
 		this.startTime = startTime;
