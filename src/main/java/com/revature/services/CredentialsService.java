@@ -30,11 +30,9 @@ public class CredentialsService {
 		if(checkCred == null) {
 			throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
 		}
-		
 		credentials = CredentialsService.hashPassword(credentials);
-		System.out.println(credentials);
 		if(checkCred.getHashedPassword().contentEquals(credentials.getHashedPassword())) {
-			return credentials.getUser();
+			return checkCred.getUser();
 		}else {
 			throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
 		}
