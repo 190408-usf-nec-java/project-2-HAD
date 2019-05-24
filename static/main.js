@@ -766,32 +766,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var src_app_services_login_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/login.service */ "./src/app/services/login.service.ts");
-/* harmony import */ var src_app_classes_users__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/classes/users */ "./src/app/classes/users.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/index.js");
 
 
 
 
 
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(loginService, router) {
+    function LoginComponent(loginService, router, cookieService) {
         this.loginService = loginService;
         this.router = router;
+        this.cookieService = cookieService;
         this.username = '';
         this.password = '';
         this.lastStatus = 200;
     }
     LoginComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.loginService.currentUser = new src_app_classes_users__WEBPACK_IMPORTED_MODULE_3__["Users"]('Amna', null, null, null, 1, null);
-        this.loginResponse = this.loginService.$loginStatus.subscribe(function (status) {
-            if (status === 200) {
-                _this.router.navigateByUrl('shifts');
-            }
-            else {
-                _this.lastStatus = status;
-            }
-        });
+        //this.loginService.currentUser = new Users('Amna', null,null,null,1,null);
     };
     LoginComponent.prototype.ngOnDestroy = function () {
         if (this.loginResponse) {
@@ -805,7 +797,18 @@ var LoginComponent = /** @class */ (function () {
         return this.username.length > 5;
     };
     LoginComponent.prototype.submit = function () {
+        var _this = this;
         this.loginService.login(this.username, this.password);
+        this.loginResponse = this.loginService.$loginStatus.subscribe(function (status) {
+            if (status === 200) {
+                _this.cookieService.set('role', _this.loginService.currentUser.role);
+                console.log(_this.loginService.currentUser);
+                _this.router.navigateByUrl('shifts');
+            }
+            else {
+                _this.lastStatus = status;
+            }
+        });
     };
     LoginComponent.prototype.validationClassesForUser = function () {
         if (this.userValid()) {
@@ -829,7 +832,7 @@ var LoginComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./login.component.html */ "./src/app/components/login/login.component.html"),
             styles: [__webpack_require__(/*! ./login.component.css */ "./src/app/components/login/login.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_login_service__WEBPACK_IMPORTED_MODULE_2__["LoginService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_login_service__WEBPACK_IMPORTED_MODULE_2__["LoginService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], ngx_cookie_service__WEBPACK_IMPORTED_MODULE_4__["CookieService"]])
     ], LoginComponent);
     return LoginComponent;
 }());

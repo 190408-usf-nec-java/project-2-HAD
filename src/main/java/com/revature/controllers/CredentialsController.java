@@ -29,6 +29,7 @@ public class CredentialsController {
 	@PostMapping("login")
 	public Users login(@RequestBody Credentials credentials) {
 		Users user = credentialsService.login(credentials);
+		System.out.println(credentials);
 		return user;
 	}
 	

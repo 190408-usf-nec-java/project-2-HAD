@@ -8,8 +8,8 @@ spring:
     password: ${JDBC_PASSWORD}
     url: ${JDBC_URL}
   jpa:
-    properties:      hibernate:
-        temp:
-          use_jdbc_metadata_defaults: false
+    properties:
+      hibernate:        temp:
+          use_jdbc_metadata_defaults: false 
     hibernate:
       ddl-auto: update

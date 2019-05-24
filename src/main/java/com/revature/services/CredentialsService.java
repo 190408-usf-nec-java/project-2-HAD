@@ -30,12 +30,19 @@ public class CredentialsService {
 		if (checkCred == null) {
 			throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
 		}
+<<<<<<< HEAD
 
 		credentials = CredentialsService.hashPassword(credentials);
 		System.out.println(credentials);
 		if (checkCred.getHashedPassword().contentEquals(credentials.getHashedPassword())) {
 			return credentials.getUser();
 		} else {
+=======
+		credentials = CredentialsService.hashPassword(credentials);
+		if(checkCred.getHashedPassword().contentEquals(credentials.getHashedPassword())) {
+			return checkCred.getUser();
+		}else {
+>>>>>>> weekgen-redux
 			throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
 		}
 	}
