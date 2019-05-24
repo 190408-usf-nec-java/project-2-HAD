@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -13,62 +14,92 @@ public class WeekDays {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "weekDays_id")
 	private int id;
-	private boolean monday;
-	private boolean tuesday;
-	private boolean wednesday;
-	private boolean thursday;
-	private boolean friday;
-	private boolean saturday;
-	private boolean sunday;
 	
+	@NotNull
+	private boolean monday;
+	
+	@NotNull
+	private boolean tuesday;
+	
+	@NotNull
+	private boolean wednesday;
+	
+	@NotNull
+	private boolean thursday;
+	
+	@NotNull
+	private boolean friday;
+	
+	@NotNull
+	private boolean saturday;
+	
+	@NotNull
+	private boolean sunday;
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public boolean isMonday() {
 		return monday;
 	}
+
 	public void setMonday(boolean monday) {
 		this.monday = monday;
 	}
+
 	public boolean isTuesday() {
 		return tuesday;
 	}
+
 	public void setTuesday(boolean tuesday) {
 		this.tuesday = tuesday;
 	}
+
 	public boolean isWednesday() {
 		return wednesday;
 	}
+
 	public void setWednesday(boolean wednesday) {
 		this.wednesday = wednesday;
 	}
+
 	public boolean isThursday() {
 		return thursday;
 	}
+
 	public void setThursday(boolean thursday) {
 		this.thursday = thursday;
 	}
+
 	public boolean isFriday() {
 		return friday;
 	}
+
 	public void setFriday(boolean friday) {
 		this.friday = friday;
 	}
+
 	public boolean isSaturday() {
 		return saturday;
 	}
+
 	public void setSaturday(boolean saturday) {
 		this.saturday = saturday;
 	}
+
 	public boolean isSunday() {
 		return sunday;
 	}
+
 	public void setSunday(boolean sunday) {
 		this.sunday = sunday;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -83,6 +114,7 @@ public class WeekDays {
 		result = prime * result + (wednesday ? 1231 : 1237);
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -110,14 +142,16 @@ public class WeekDays {
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
 		return "WeekDays [id=" + id + ", monday=" + monday + ", tuesday=" + tuesday + ", wednesday=" + wednesday
 				+ ", thursday=" + thursday + ", friday=" + friday + ", saturday=" + saturday + ", sunday=" + sunday
 				+ "]";
 	}
-	public WeekDays(int id, boolean monday, boolean tuesday, boolean wednesday, boolean thursday, boolean friday,
-			boolean saturday, boolean sunday) {
+
+	public WeekDays(int id, @NotNull boolean monday, @NotNull boolean tuesday, @NotNull boolean wednesday,
+			@NotNull boolean thursday, @NotNull boolean friday, @NotNull boolean saturday, @NotNull boolean sunday) {
 		super();
 		this.id = id;
 		this.monday = monday;
@@ -128,10 +162,12 @@ public class WeekDays {
 		this.saturday = saturday;
 		this.sunday = sunday;
 	}
+
 	public WeekDays() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	
 	
 }
