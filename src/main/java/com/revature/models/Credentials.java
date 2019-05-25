@@ -21,10 +21,11 @@ public class Credentials {
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
 	@Column(name = "cred_id")
 	private int id;
-	@NotNull
+	
 	@Transient
 	private char[] password;
 	
+	@NotNull
 	private String hashedPassword;
 	
 	@NotNull
