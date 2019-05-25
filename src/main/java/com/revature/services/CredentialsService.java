@@ -34,7 +34,10 @@ public class CredentialsService {
 		}
 		credentials = CredentialsService.hashPassword(credentials);
 		if (checkCred.getHashedPassword().equals(credentials.getHashedPassword())) {
+			checkCred.getUser().setToken(getToken());
 			Hibernate.initialize(checkCred.getUser());
+			System.out.println(checkCred.getUser());
+			userRepository.updateUserToken(checkCred.getUser());
 			return checkCred.getUser();
 		} else {
 			throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
