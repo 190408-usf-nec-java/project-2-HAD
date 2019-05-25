@@ -31,7 +31,6 @@ public class CredentialsController {
 	@PostMapping("login")
 	public Users login(@RequestBody Credentials credentials) {
 		Users user = credentialsService.login(credentials);
-		user.setToken(credentialsService.getToken());
 		return user;
 	}
 	

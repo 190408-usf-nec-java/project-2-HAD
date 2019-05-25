@@ -55,4 +55,10 @@ public class UserRepository {
 		session.delete(credentials);
 	}
 
+	@Transactional
+	public void updateUserToken(Users user) {
+		Session session = sf.getCurrentSession();
+		session.update(user);
+	}
+
 }
