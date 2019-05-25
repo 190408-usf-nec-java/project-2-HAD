@@ -3,6 +3,7 @@ package com.revature.models;
 import java.time.DayOfWeek;
 import java.util.Map;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,10 +18,10 @@ public class Week {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Day firstDay;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	private Map<DayOfWeek, Day> days;
 
 	public int getId() {

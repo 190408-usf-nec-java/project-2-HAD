@@ -61,6 +61,10 @@ var routes = [
         component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"]
     },
     {
+        path: '',
+        component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"]
+    },
+    {
         path: 'employee',
         component: _components_employee_list_employee_list_component__WEBPACK_IMPORTED_MODULE_4__["EmployeeListComponent"]
     },
@@ -284,14 +288,16 @@ var ShiftConfig = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WeekDays", function() { return WeekDays; });
 var WeekDays = /** @class */ (function () {
-    function WeekDays(Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday) {
-        this.Monday = Monday;
-        this.Tuesday = Tuesday;
-        this.Wednesday = Wednesday;
-        this.Thursday = Thursday;
-        this.Friday = Friday;
-        this.Saturday = Saturday;
-        this.Sunday = Sunday;
+    function WeekDays(Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, id) {
+        if (id === void 0) { id = 0; }
+        this.monday = Monday;
+        this.tuesday = Tuesday;
+        this.wednesday = Wednesday;
+        this.thursday = Thursday;
+        this.friday = Friday;
+        this.saturday = Saturday;
+        this.sunday = Sunday;
+        this.id = id;
     }
     return WeekDays;
 }());
@@ -369,7 +375,7 @@ var Users = /** @class */ (function () {
         this.email = email;
         this.lastName = lastname;
         this.role = role;
-        this.userid = id;
+        this.userId = id;
         this.token = token;
     }
     return Users;
@@ -520,7 +526,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n    <h1>New Employee</h1>\r\n    <form (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"form-group\">\r\n        <label for=\"name\">First Name</label>\r\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"user.firstName\" [ngModelOptions]=\"{standalone: true}\" required>\r\n      </div>\r\n \r\n      <div class=\"form-group\">\r\n        <label for=\"alterEgo\">Last Name</label>\r\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"user.lastName\" [ngModelOptions]=\"{standalone: true}\" required>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label for=\"alterEgo\">Email</label>\r\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"user.email\" [ngModelOptions]=\"{standalone: true}\" required>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label for=\"alterEgo\">Role</label>\r\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"user.role\" [ngModelOptions]=\"{standalone: true}\" required>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label for=\"alterEgo\">Username</label>\r\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"username\" [ngModelOptions]=\"{standalone: true}\" required>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label for=\"alterEgo\">Password</label>\r\n        <input type=\"password\" class=\"form-control\" [(ngModel)]=\"password\" [ngModelOptions]=\"{standalone: true}\" required>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label for=\"alterEgo\">Confirm Password</label>\r\n        <input type=\"password\" class=\"form-control\" [(ngModel)]=\"passwordConfirmation\" [ngModelOptions]=\"{standalone: true}\" required>\r\n      </div>\r\n \r\n      <!-- <button type=\"submit\" [disabled]=\"!formValidation()\" class=\"btn btn-success\">Submit</button> -->\r\n      <button type=\"submit\" class=\"btn btn-success\">Submit</button>\r\n \r\n    </form>\r\n    \r\n</div>"
+module.exports = "<div class=\"container\">\r\n    <h1>New Employee</h1>\r\n    <form (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"form-group\">\r\n        <label for=\"name\">First Name</label>\r\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"user.firstName\" [ngModelOptions]=\"{standalone: true}\" required>\r\n      </div>\r\n \r\n      <div class=\"form-group\">\r\n        <label for=\"alterEgo\">Last Name</label>\r\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"user.lastName\" [ngModelOptions]=\"{standalone: true}\" required>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label for=\"alterEgo\">Email</label>\r\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"user.email\" [ngModelOptions]=\"{standalone: true}\" required>\r\n      </div>\r\n\r\n      <div class=\"radio\">\r\n        <label><input type=\"radio\" name=\"optradio\" [(ngModel)]=\"user.role\" value=\"1\" [ngModelOptions]=\"{standalone: true}\" checked>Employee</label>\r\n      </div>\r\n      <div class=\"radio\">\r\n        <label><input type=\"radio\" name=\"optradio\" [(ngModel)]=\"user.role\" value=\"2\" [ngModelOptions]=\"{standalone: true}\">Manager</label>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label for=\"alterEgo\">Username</label>\r\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"username\" [ngModelOptions]=\"{standalone: true}\" required>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label for=\"alterEgo\">Password</label>\r\n        <input type=\"password\" class=\"form-control\" [(ngModel)]=\"password\" [ngModelOptions]=\"{standalone: true}\" required>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label for=\"alterEgo\">Confirm Password</label>\r\n        <input type=\"password\" class=\"form-control\" [(ngModel)]=\"passwordConfirmation\" [ngModelOptions]=\"{standalone: true}\" required>\r\n      </div>\r\n \r\n      <!-- <button type=\"submit\" [disabled]=\"!formValidation()\" class=\"btn btn-success\">Submit</button> -->\r\n      <button type=\"submit\" class=\"btn btn-success\">Submit</button>\r\n \r\n    </form>\r\n    \r\n</div>"
 
 /***/ }),
 
@@ -564,7 +570,6 @@ var EmployeeCreateComponent = /** @class */ (function () {
         }
     };
     EmployeeCreateComponent.prototype.onSubmit = function () {
-        // this.user.credentials = new Credentials(this.password, '', this.username);
         var deleteMe = new src_app_classes_credentials__WEBPACK_IMPORTED_MODULE_3__["Credentials"]('cmCM11!!1', '', 'charlesManson', new src_app_classes_users__WEBPACK_IMPORTED_MODULE_2__["Users"]('Charles', 'Manson', 'cm@hotmail.com', 1, -1));
         this.employeeService.createUser(deleteMe);
         this.router.navigateByUrl('employee');
@@ -841,7 +846,7 @@ module.exports = ".nav-link:hover{\r\n    background-color: blueviolet;\r\n}\r\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-sm bg-primary navbar-secondary d-flex justify-content-between\">\r\n  <button class=\"d-lg-none btn btn-outline-secondary\" (click)=\"isCollapsed = !isCollapsed\" [attr.aria-expanded]=\"!isCollapsed\" aria-controls=\"nabvar-content\">\r\n    <img class=\"navbar-toggler-icon\" alt=\"navigation menu\" src=\"./assets/img/hamburger.png\"></button>\r\n  <div id=\"navbar-content\" class=\"d-none d-lg-block\">  \r\n    <ul class=\"navbar-nav\">\r\n      <li class=\"nav-item\" >\r\n        <a routerLink=\"shifts\" class=\"nav-link text-white hover-light\">Schedule</a>\r\n      </li>\r\n        <li class=\"nav-item\"  *ngIf = \"managerValid()\">\r\n            <a routerLink=\"employee\" class=\"nav-link text-white hover-light\">Manage Employees</a>\r\n          </li>\r\n      <li class=\"nav-item\">\r\n\r\n        <a routerLink=\"login\" class=\"nav-link text-white hover-light\">Login</a>\r\n\r\n      <li class=\"nav-item\" *ngIf = \"managerValid()\">\r\n          <a routerLink=\"shift-config\" class=\"nav-link text-white hover-light\">Adding Shifts</a>\r\n        </li>\r\n        <li class=\"nav-item\" >\r\n            <a routerLink=\"employee-create\" class=\"nav-link text-white hover-light\">Signup</a>\r\n          </li>\r\n      <li class=\"nav-item\">\r\n        <a routerLink=\"open\" class=\"nav-link text-white\">Open Shifts</a>\r\n      </li> \r\n      \r\n    </ul>\r\n  </div>\r\n  <div [collapse]=\"!isCollapsed\" id=\"navbar-content\" class=\"d-lg-none\">  \r\n    <ul class=\"navbar-nav\">\r\n      <li class=\"nav-item\" >\r\n        <a routerLink=\"shifts\" class=\"nav-link text-white hover-light\">Schedule</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a routerLink=\"login\" class=\"nav-link text-white hover-light\">Login</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a routerLink=\"open\" class=\"nav-link text-white hover-light\">Open Shifts</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a routerLink=\"shift-config\" class=\"nav-link text-white hover-light\">Adding Shifts</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a routerLink=\"employee\" class=\"nav-link text-white hover-light\">Employees</a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n  <h1 class=\"h1 text-white d-flex\">Logo Here</h1>\r\n</nav>\r\n"
+module.exports = "<nav class=\"navbar navbar-expand-sm bg-primary navbar-secondary d-flex justify-content-between\">\r\n  <button class=\"d-lg-none btn btn-outline-secondary\" (click)=\"isCollapsed = !isCollapsed\" [attr.aria-expanded]=\"!isCollapsed\" aria-controls=\"nabvar-content\">\r\n    <img class=\"navbar-toggler-icon\" alt=\"navigation menu\" src=\"./assets/img/hamburger.png\"></button>\r\n  <div id=\"navbar-content\" class=\"d-none d-lg-block\">  \r\n    <ul class=\"navbar-nav\">\r\n      <li class=\"nav-item\" >\r\n        <a routerLink=\"shifts\" class=\"nav-link text-white hover-light\">Schedule</a>\r\n      </li>\r\n        <li class=\"nav-item\"  *ngIf = \"managerValid()\">\r\n            <a routerLink=\"employee\" class=\"nav-link text-white hover-light\">Manage Employees</a>\r\n          </li>\r\n      <li class=\"nav-item\">\r\n\r\n        <a routerLink=\"login\" class=\"nav-link text-white hover-light\">Login</a>\r\n\r\n      <li class=\"nav-item\" *ngIf = \"managerValid()\">\r\n          <a routerLink=\"shift-config\" class=\"nav-link text-white hover-light\">Adding Shifts</a>\r\n        </li>\r\n        <li class=\"nav-item\" >\r\n            <a routerLink=\"employee-create\" class=\"nav-link text-white hover-light\">Signup</a>\r\n          </li>\r\n      <li class=\"nav-item\">\r\n        <a routerLink=\"open\" class=\"nav-link text-white\">Open Shifts</a>\r\n      </li> \r\n      <li class=\"nav-item\" >\r\n        <a (click)=\"logOut()\" routerLink=\"login\" class=\"nav-link text-white hover-light\">Log Out</a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n  <div [collapse]=\"!isCollapsed\" id=\"navbar-content\" class=\"d-lg-none\">  \r\n    <ul class=\"navbar-nav\">\r\n      <li class=\"nav-item\" >\r\n        <a routerLink=\"shifts\" class=\"nav-link text-white hover-light\">Schedule</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a routerLink=\"login\" class=\"nav-link text-white hover-light\">Login</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a routerLink=\"open\" class=\"nav-link text-white hover-light\">Open Shifts</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a routerLink=\"shift-config\" class=\"nav-link text-white hover-light\">Adding Shifts</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a routerLink=\"employee\" class=\"nav-link text-white hover-light\">Employees</a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n  <h1 class=\"h1 text-white d-flex\">Logo Here</h1>\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -857,13 +862,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NavigationComponent", function() { return NavigationComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/index.js");
+/* harmony import */ var src_app_services_login_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/login.service */ "./src/app/services/login.service.ts");
+/* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/index.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
+
 
 
 
 var NavigationComponent = /** @class */ (function () {
-    function NavigationComponent(cookieService) {
+    function NavigationComponent(cookieService, loginService, router) {
         this.cookieService = cookieService;
+        this.loginService = loginService;
+        this.router = router;
         this.isCollapsed = false;
     }
     NavigationComponent.prototype.ngOnInit = function () {
@@ -873,13 +884,18 @@ var NavigationComponent = /** @class */ (function () {
             return true;
         }
     };
+    NavigationComponent.prototype.logOut = function () {
+        this.loginService.currentUser = null;
+        console.log('Logged off');
+        this.loginService.logOff();
+    };
     NavigationComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-navigation',
             template: __webpack_require__(/*! ./navigation.component.html */ "./src/app/components/navigation/navigation.component.html"),
             styles: [__webpack_require__(/*! ./navigation.component.css */ "./src/app/components/navigation/navigation.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [ngx_cookie_service__WEBPACK_IMPORTED_MODULE_2__["CookieService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [ngx_cookie_service__WEBPACK_IMPORTED_MODULE_3__["CookieService"], src_app_services_login_service__WEBPACK_IMPORTED_MODULE_2__["LoginService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
     ], NavigationComponent);
     return NavigationComponent;
 }());
@@ -1458,63 +1474,21 @@ var ShiftsComponent = /** @class */ (function () {
         var i = 0;
         Object.getOwnPropertyNames(map).forEach(function (day) {
             if (i < array.length) {
-                console.log(map[array[i].name]);
+                //console.log(map[array[i].name]);
                 // map[array[i].name] = array[i];
-                if (array[i].shifts[0].employees !== null) {
-                    console.log(array[i].name);
-                }
+                map[array[i].name] = array[i];
                 i++;
             }
         });
-        console.log(map);
-        // array.push(map.get('MONDAY'));
-        // array.push(map.get('TUESDAY'));
-        // return map;
+        //console.log(map);
+        return map;
     };
     ShiftsComponent.prototype.submitWeek = function () {
-        console.log('hey there');
-        // let week: Week;
-        console.log(this.daysAsList);
-        console.log(this.currentWeek);
-        this.convertToMap(this.daysAsList, this.currentWeek.days);
-        // this.shiftService.sendUpdatedWeek(week);
+        var days = this.convertToMap(this.daysAsList, this.currentWeek.days);
+        this.currentWeek.days = days;
+        this.shiftService.sendUpdatedWeek(this.currentWeek);
     };
-    // 768 is small breakpoint for bootstrap
-    /*genEmptyWeek(): Week {
-      const days = new Array<Day>();
-      for (let i = 0; i < 7; i++) {
-        days.push(new Day(new Date(Date.now()), new Array<Shift>()));
-      }
-      return new Week(days,  1, new Date(''));
-    }*/
     ShiftsComponent.prototype.genSampleData = function () {
-        /*let bob = new Users('Bob', 'Sather', 'bobsather@gmail.com', 'employee', 1,
-          new Credentials('billyboy', 'aoishgoihsgohap dhgap0sygsadgh', 'bobsath'));
-        let martha = new Users('Martha', 'Stuart', 'martha@margo.wiz', 'employee', 2,
-          new Credentials('cookingiscool', 'aosihgoisahdpgoihaspdoigh', 'marthathecook'));
-        let monty = new Users('Monty', 'Python', 'monty@python.com', 'employee', 3,
-          new Credentials('hamsterparty', 'aosihgoisahdpgoihaspdoigh', 'montypython'));
-        let james = new Users('James', 'Bond', 'bonejamesbond@bond.com', 'employee', 4,
-          new Credentials('shakennotstirred', 'aosihgoisahdpgoihaspdoigh', 'jamesbond'));*/
-        var shift = new src_app_classes_shift__WEBPACK_IMPORTED_MODULE_4__["Shift"](1, 0, 0, null, 2, true);
-        /*let nshift = new Shift(3, 3, 16, emps2, 2);
-        let sshift = new Shift(2, 17, 20, emps2, 2);
-        let tshift = new Shift(0, 1, 9, emps, 2);*/
-        var shifts1 = new Array(shift);
-        /*let shifts2 = new Array<Shift>(nshift);
-        let shifts3 = new Array<Shift>(sshift, fShift, tshift);
-        let shifts4 = new Array<Shift>(nshift);
-        let shifts5 = new Array<Shift>(sshift, fShift, tshift);
-        let shifts6 = new Array<Shift>(sshift, fShift, tshift);
-        let shifts7 = new Array<Shift>(sshift, fShift, tshift);*/
-        /*let monday = new Day(new Date('5/6/2019'), shifts1);
-        let tuesday = new Day(new Date('5/7/2019'), shifts1);
-        let wednesday = new Day(new Date('5/8/2019'), shifts1);
-        let thursday = new Day(new Date('5/9/2019'), shifts1);
-        let friday = new Day(new Date('5/10/2019'), shifts1);
-        let saturday = new Day(new Date('5/11/2019'), shifts1);
-        let sunday = new Day(new Date('5/12/2019'), shifts1);*/
-        //let days = new Map<string, Day>('MONDAY', monday, tuesday, wednesday, thursday, friday, saturday, sunday);
         var week = new src_app_classes_week__WEBPACK_IMPORTED_MODULE_2__["Week"](/*days*/ null, 1, new Date(Date.now()));
         return week;
     };
@@ -1767,7 +1741,6 @@ __webpack_require__.r(__webpack_exports__);
 var EmployeeService = /** @class */ (function () {
     function EmployeeService(httpClient) {
         this.httpClient = httpClient;
-        this.listUsers = [];
     }
     EmployeeService.prototype.getAllUsers = function () {
         var _this = this;
@@ -1775,7 +1748,6 @@ var EmployeeService = /** @class */ (function () {
             observe: 'response'
         }).subscribe(function (response) {
             var user = JSON.stringify(response.body);
-            console.log(user);
             _this.listUsers = JSON.parse(user);
         }, function (err) {
             console.log(err);
@@ -1783,7 +1755,8 @@ var EmployeeService = /** @class */ (function () {
     };
     EmployeeService.prototype.deleteUser = function (user) {
         var _this = this;
-        this.httpClient.delete('http://localhost:8081/people/' + user.userid, {
+        console.log(user);
+        this.httpClient.delete('http://localhost:8081/people/' + user.user_id, {
             observe: 'response'
         }).subscribe(function (response) {
             console.log(response.body);
@@ -1873,6 +1846,9 @@ var LoginService = /** @class */ (function () {
     LoginService.prototype.getLoggedIn = function () {
         return this.loggedIn;
     };
+    LoginService.prototype.logOff = function () {
+        this.loggedIn = false;
+    };
     LoginService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
             providedIn: 'root'
@@ -1912,11 +1888,13 @@ var ShiftConfigService = /** @class */ (function () {
     }
     ShiftConfigService.prototype.postShiftConfig = function (payload) {
         var _this = this;
+        console.log(payload);
         this.httpClient.post('http://localhost:8081/config', payload, {
             observe: 'response',
         }).subscribe(function (response) {
             _this.shiftConfigStatusSubject.next(200);
             console.log('We made it');
+            console.log(payload);
         }, function (err) {
             _this.shiftConfigStatusSubject.next(err.status);
         });
@@ -2006,7 +1984,7 @@ var ShiftService = /** @class */ (function () {
     };
     ShiftService.prototype.sendUpdatedWeek = function (week) {
         var _this = this;
-        this.httpClient.post('http://localhost:8081/week', week, {
+        this.httpClient.put('http://localhost:8081/week', week, {
             observe: 'response',
         }).subscribe(function (response) {
             if (response.status === 200) {

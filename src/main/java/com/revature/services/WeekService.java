@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.models.ShiftConfig;
 import com.revature.models.Week;
@@ -37,7 +38,7 @@ public class WeekService {
 	public void createWeek(Week week) {
 		weekRepository.saveWeek(week);
 	}
-	
+	@Transactional
 	public Week getWeekById(int userId) {
 		if(weekRepository.getWeekById(userId) == null) {
 			System.out.println("No week stored");
@@ -50,6 +51,7 @@ public class WeekService {
 			shiftConfig.add(shift1);
 			shiftConfig.add(shift2);
 			Week week = ShiftConfigService.GenerateWeek(shiftConfig);
+			weekRepository.saveWeek(week);
 			return week;
 		}else {
 			return weekRepository.getWeekById(userId);

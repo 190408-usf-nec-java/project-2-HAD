@@ -2,6 +2,7 @@ package com.revature.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +22,7 @@ public class Shift {
 	@NotNull
 	private int endHour;
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.PERSIST)
 	private List<Employee> employees;
 
 	
