@@ -29,6 +29,7 @@ public class Credentials {
 	private String hashedPassword;
 	
 	@NotNull
+	@Column(unique = true)
 	private String username;
 	
 	@Autowired

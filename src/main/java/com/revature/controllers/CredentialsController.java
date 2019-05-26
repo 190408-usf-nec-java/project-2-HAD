@@ -2,6 +2,7 @@ package com.revature.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,7 +47,9 @@ public class CredentialsController {
 	
 	@PostMapping("create")
 	public Users createCredentials(@RequestBody Credentials credentials) {
-		System.out.println(credentials);
+		if (!credentialsService.isUnique(credentials)) {
+			throw new HttpClientErrorException(HttpStatus.FORBIDDEN);
+		}
 		credentials = CredentialsService.hashPassword(credentials);		
 		Users user = credentialsService.createCredentials(credentials);
 		return user;

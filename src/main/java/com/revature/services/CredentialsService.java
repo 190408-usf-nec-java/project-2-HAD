@@ -88,4 +88,8 @@ public class CredentialsService {
 		return sb.toString();
 	}
 
+	public boolean isUnique(Credentials credentials) {
+		return credRepo.isUnique(credentials);
+	}
+
 }
