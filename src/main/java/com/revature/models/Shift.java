@@ -8,7 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 public class Shift {
@@ -22,39 +25,66 @@ public class Shift {
 	@NotNull
 	private int endHour;
 	
-	@ManyToMany(cascade = CascadeType.PERSIST)
-	private List<Employee> employees;
-
+	@Autowired
+	@ManyToMany(cascade = CascadeType.ALL)
+	private List<Employee> people;
 	
 	
 	public Shift() {
 		super();
 	}
 
-	public Shift(int id, @NotNull int startHour, @NotNull int endHour, List<Employee> employees) {
-		super();
-		this.id = id;
-		this.startHour = startHour;
-		this.endHour = endHour;
-		this.employees = employees;
+
+	public int getId() {
+		return id;
 	}
 
-	@Override
-	public String toString() {
-		return "Shift [id=" + id + ", startHour=" + startHour + ", endHour=" + endHour + ", employees=" + employees
-				+ "]";
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public int getStartHour() {
+		return startHour;
+	}
+
+
+	public void setStartHour(int startHour) {
+		this.startHour = startHour;
+	}
+
+
+	public int getEndHour() {
+		return endHour;
+	}
+
+
+	public void setEndHour(int endHour) {
+		this.endHour = endHour;
+	}
+
+
+	public List<Employee> getEmployees() {
+		return people;
+	}
+
+
+	public void setEmployees(List<Employee> employees) {
+		this.people = employees;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((employees == null) ? 0 : employees.hashCode());
+		result = prime * result + ((people == null) ? 0 : people.hashCode());
 		result = prime * result + endHour;
 		result = prime * result + id;
 		result = prime * result + startHour;
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -65,10 +95,10 @@ public class Shift {
 		if (getClass() != obj.getClass())
 			return false;
 		Shift other = (Shift) obj;
-		if (employees == null) {
-			if (other.employees != null)
+		if (people == null) {
+			if (other.people != null)
 				return false;
-		} else if (!employees.equals(other.employees))
+		} else if (!people.equals(other.people))
 			return false;
 		if (endHour != other.endHour)
 			return false;
@@ -79,37 +109,22 @@ public class Shift {
 		return true;
 	}
 
-	public int getId() {
-		return id;
+
+	@Override
+	public String toString() {
+		return "Shift [id=" + id + ", startHour=" + startHour + ", endHour=" + endHour + ", employees=" + people
+				+ "]";
 	}
 
-	public void setId(int id) {
+
+	public Shift(int id, @NotNull int startHour, @NotNull int endHour, List<Employee> employees) {
+		super();
 		this.id = id;
-	}
-
-	public int getStartHour() {
-		return startHour;
-	}
-
-	public void setStartHour(int startHour) {
 		this.startHour = startHour;
-	}
-
-	public int getEndHour() {
-		return endHour;
-	}
-
-	public void setEndHour(int endHour) {
 		this.endHour = endHour;
+		this.people = employees;
 	}
 
-	public List<Employee> getEmployees() {
-		return employees;
-	}
-
-	public void setEmployees(List<Employee> employees) {
-		this.employees = employees;
-	}
 	
 	
 }

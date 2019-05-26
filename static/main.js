@@ -1303,7 +1303,7 @@ var ShiftsComponent = /** @class */ (function () {
         }
         this.currentWeek = this.genSampleData();
         // this.daysAsList = this.convertToArray(this.currentWeek.days);
-        this.shiftService.fetchCurrentWeekByUser(2);
+        this.shiftService.fetchCurrentWeekById(22);
         this.shiftService.$shiftStatus.subscribe(function (status) {
             if (status === 200) {
                 _this.loaded = true;
@@ -1463,9 +1463,16 @@ var ShiftsComponent = /** @class */ (function () {
     };
     ShiftsComponent.prototype.convertToArray = function (map) {
         var array = new Array();
-        Object.getOwnPropertyNames(map).forEach(function (day) {
-            array.push(map[day]);
-        });
+        array.push(map.MONDAY);
+        array.push(map.TUESDAY);
+        array.push(map.WEDNESDAY);
+        array.push(map.THURSDAY);
+        array.push(map.FRIDAY);
+        array.push(map.SATURDAY);
+        array.push(map.SUNDAY);
+        /*Object.getOwnPropertyNames(map).forEach(day => {
+          array.push(map[day]);
+        });*/
         //array.push(map.get('MONDAY'));
         //array.push(map.get('TUESDAY'));
         return array;
@@ -1956,7 +1963,7 @@ var ShiftService = /** @class */ (function () {
         });
     };
     // This method is only run on component init
-    ShiftService.prototype.fetchCurrentWeekByUser = function (id) {
+    ShiftService.prototype.fetchCurrentWeekById = function (id) {
         var _this = this;
         this.httpClient.get("http://localhost:8081/week/" + id, {
             observe: 'response',

@@ -38,24 +38,31 @@ public class ShiftConfigService {
 		Day monday = new Day();
 		monday.setName(DayOfWeek.MONDAY);
 		monday.setShifts(new ArrayList<Shift>());
+		monday.setDate("1/1/2019");
 		Day tuesday = new Day();
 		tuesday.setName(DayOfWeek.TUESDAY);
 		tuesday.setShifts(new ArrayList<Shift>());
+		tuesday.setDate("1/1/2019");
 		Day wednesday = new Day();
 		wednesday.setName(DayOfWeek.WEDNESDAY);
 		wednesday.setShifts(new ArrayList<Shift>());
+		wednesday.setDate("1/1/2019");
 		Day thursday = new Day();
 		thursday.setName(DayOfWeek.THURSDAY);
 		thursday.setShifts(new ArrayList<Shift>());
+		thursday.setDate("1/1/2019");
 		Day friday = new Day();
 		friday.setName(DayOfWeek.FRIDAY);
 		friday.setShifts(new ArrayList<Shift>());
+		friday.setDate("1/1/2019");
 		Day saturday = new Day();
 		saturday.setName(DayOfWeek.SATURDAY);
 		saturday.setShifts(new ArrayList<Shift>());
+		saturday.setDate("1/1/2019");
 		Day sunday = new Day();
 		sunday.setName(DayOfWeek.SUNDAY);
 		sunday.setShifts(new ArrayList<Shift>());
+		sunday.setDate("1/1/2019");
 		configurations.forEach(config -> {
 			Shift shift = new Shift();
 			shift.setStartHour(config.getStartTime());
@@ -96,7 +103,7 @@ public class ShiftConfigService {
 		days.put(thursday.getName(), thursday);
 		days.put(friday.getName(), friday);
 		days.put(saturday.getName(), saturday);
-		days.put(saturday.getName(), sunday);
+		days.put(sunday.getName(), sunday);
 		week.setDays(days);
 		return week;
 	}
