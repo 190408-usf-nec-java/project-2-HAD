@@ -2,6 +2,7 @@ package com.revature.services;
 
 import java.security.MessageDigest;
 import java.security.SecureRandom;
+import java.util.List;
 
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,7 @@ public class CredentialsService {
 		StringBuilder sb = new StringBuilder();
 		StringBuilder sb2 = new StringBuilder();
 		char[] chars = credentials.getPassword();
+		System.out.println(credentials.getPassword());
 		sb.append(chars);
 		try {
 			MessageDigest SHA256 = MessageDigest.getInstance("SHA-256");
@@ -90,6 +92,10 @@ public class CredentialsService {
 
 	public boolean isUnique(Credentials credentials) {
 		return credRepo.isUnique(credentials);
+
+	}
+	public List<Credentials> getAllCredentials() {
+		return credRepo.getAllCredentials();
 	}
 
 }
