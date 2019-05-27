@@ -29,7 +29,7 @@ public class Day {
 	private String date;
 	
 	@Autowired
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	private List<Shift> shifts;
 
 	public int getId() {

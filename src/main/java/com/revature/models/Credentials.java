@@ -15,6 +15,8 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Credentials {
 	@Id
@@ -24,7 +26,8 @@ public class Credentials {
 	
 	@Transient
 	private char[] password;
-	
+
+	@JsonIgnore
 	@NotNull
 	private String hashedPassword;
 	
@@ -72,8 +75,8 @@ public class Credentials {
 		return user;
 	}
 
-	public void setUser(Users user) {
-		this.user = user;
+	public void setUser(Users users) {
+		this.user = users;
 	}
 
 	@Override

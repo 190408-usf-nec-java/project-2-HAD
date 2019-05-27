@@ -1,5 +1,7 @@
 package com.revature.repositories;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.hibernate.Session;
@@ -40,6 +42,14 @@ public class CredentialsRepository {
 		session.save(credentials.getUser());
 		session.save(credentials);
 		return credentials.getUser();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Credentials> getAllCredentials() {
+		String hql = "FROM Credentials c";
+		Session session = sf.getCurrentSession();
+		List<Credentials> cred = session.createQuery(hql).getResultList();
+		return cred;
 	}
 	
 }

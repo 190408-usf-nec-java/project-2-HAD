@@ -317,13 +317,47 @@ var WeekDays = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Credentials", function() { return Credentials; });
 var Credentials = /** @class */ (function () {
-    function Credentials(password, hashedPassword, username, user) {
+    function Credentials(id, password, username, user) {
         this.password = password;
-        this.hashedPassword = hashedPassword;
         this.username = username;
         this.user = user;
+        this.id = id;
     }
     return Credentials;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/classes/env.ts":
+/*!********************************!*\
+  !*** ./src/app/classes/env.ts ***!
+  \********************************/
+/*! exports provided: Env */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Env", function() { return Env; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var Env = /** @class */ (function () {
+    function Env() {
+        this.ec2Url = 'http://ec2-34-201-46-35.compute-1.amazonaws.com:8081';
+    }
+    Env.prototype.getProdUrl = function () {
+        return this.ec2Url;
+    };
+    Env = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], Env);
+    return Env;
 }());
 
 
@@ -526,7 +560,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n    <h1>New Employee</h1>\r\n    <form (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"form-group\">\r\n        <label for=\"name\">First Name</label>\r\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"user.firstName\" [ngModelOptions]=\"{standalone: true}\" required>\r\n      </div>\r\n \r\n      <div class=\"form-group\">\r\n        <label for=\"alterEgo\">Last Name</label>\r\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"user.lastName\" [ngModelOptions]=\"{standalone: true}\" required>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label for=\"alterEgo\">Email</label>\r\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"user.email\" [ngModelOptions]=\"{standalone: true}\" required>\r\n      </div>\r\n\r\n      <div class=\"radio\">\r\n        <label><input type=\"radio\" name=\"optradio\" [(ngModel)]=\"user.role\" value=\"1\" [ngModelOptions]=\"{standalone: true}\" checked>Employee</label>\r\n      </div>\r\n      <div class=\"radio\">\r\n        <label><input type=\"radio\" name=\"optradio\" [(ngModel)]=\"user.role\" value=\"2\" [ngModelOptions]=\"{standalone: true}\">Manager</label>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label for=\"alterEgo\">Username</label>\r\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"username\" [ngModelOptions]=\"{standalone: true}\" required>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label for=\"alterEgo\">Password</label>\r\n        <input type=\"password\" class=\"form-control\" [(ngModel)]=\"password\" [ngModelOptions]=\"{standalone: true}\" required>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label for=\"alterEgo\">Confirm Password</label>\r\n        <input type=\"password\" class=\"form-control\" [(ngModel)]=\"passwordConfirmation\" [ngModelOptions]=\"{standalone: true}\" required>\r\n      </div>\r\n \r\n      <!-- <button type=\"submit\" [disabled]=\"!formValidation()\" class=\"btn btn-success\">Submit</button> -->\r\n      <button type=\"submit\" class=\"btn btn-success\">Submit</button>\r\n \r\n    </form>\r\n    \r\n</div>"
+module.exports = "<div class=\"container\">\r\n    <h1>New Employee</h1>\r\n    <form (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"form-group\">\r\n        <label for=\"name\">First Name</label>\r\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"user.firstName\" [ngModelOptions]=\"{standalone: true}\" required>\r\n      </div>\r\n \r\n      <div class=\"form-group\">\r\n        <label for=\"alterEgo\">Last Name</label>\r\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"user.lastName\" [ngModelOptions]=\"{standalone: true}\" required>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label for=\"alterEgo\">Email</label>\r\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"user.email\" [ngModelOptions]=\"{standalone: true}\" required>\r\n      </div>\r\n\r\n      <div class=\"radio\">\r\n        <label><input type=\"radio\" name=\"optradio\" [(ngModel)]=\"user.role\" value=\"1\" [ngModelOptions]=\"{standalone: true}\" checked>Employee</label>\r\n      </div>\r\n      <div class=\"radio\">\r\n        <label><input type=\"radio\" name=\"optradio\" [(ngModel)]=\"user.role\" value=\"2\" [ngModelOptions]=\"{standalone: true}\">Manager</label>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label for=\"alterEgo\">Username</label>\r\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"username\" [ngModelOptions]=\"{standalone: true}\" required>\r\n        <div *ngIf = \"employeeService.nonUniqueUsername\" class=\"alert alert-danger\" role=\"alert\">\r\n          Username taken.\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label for=\"alterEgo\">Password</label>\r\n        <input type=\"password\" class=\"form-control\" [(ngModel)]=\"password\" [ngModelOptions]=\"{standalone: true}\" required>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label for=\"alterEgo\">Confirm Password</label>\r\n        <input type=\"password\" class=\"form-control\" [(ngModel)]=\"passwordConfirmation\" [ngModelOptions]=\"{standalone: true}\" required>\r\n      </div>\r\n \r\n      <button type=\"submit\" [disabled]=\"!formValidation()\" class=\"btn btn-success\">Submit</button>\r\n\r\n      <!-- <button (click)=\"sampleUserSubmit()\" class=\"btn btn-success\">SampleUserSubmit</button> -->\r\n    </form>\r\n    \r\n</div>"
 
 /***/ }),
 
@@ -570,8 +604,8 @@ var EmployeeCreateComponent = /** @class */ (function () {
         }
     };
     EmployeeCreateComponent.prototype.onSubmit = function () {
-        var deleteMe = new src_app_classes_credentials__WEBPACK_IMPORTED_MODULE_3__["Credentials"]('cmCM11!!1', '', 'charlesManson', new src_app_classes_users__WEBPACK_IMPORTED_MODULE_2__["Users"]('Charles', 'Manson', 'cm@hotmail.com', 1, -1));
-        this.employeeService.createUser(deleteMe);
+        var credentials = new src_app_classes_credentials__WEBPACK_IMPORTED_MODULE_3__["Credentials"](null, this.password, this.username, this.user);
+        this.employeeService.createUser(credentials);
         this.router.navigateByUrl('employee');
     };
     EmployeeCreateComponent.prototype.formValidation = function () {
@@ -641,7 +675,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"table-responsive\">\r\n    <table class=\"table table-striped table-hover table-bordered\">\r\n      <tr>\r\n        <th>Firstname</th>\r\n        <th>Lastname</th>\r\n        <th>Email</th>\r\n        <th>Role</th>\r\n        <th>Delete</th>\r\n      </tr>\r\n      <tr *ngFor=\"let user of employeeService.listUsers\">\r\n        <td>{{user.firstName}}</td>\r\n        <td>{{user.lastName}}</td>\r\n        <td>{{user.email}}</td>\r\n        <td>{{user.role}}</td>\r\n        <td>\r\n          <button class=\"btn btn-danger\" (click)=\"delete(user)\">Delete</button>\r\n        </td>\r\n      </tr>\r\n    </table>\r\n  </div>\r\n  <button class=\"btn btn-info\" (click)=\"create(user)\">New Employee</button>\r\n  "
+module.exports = "<div class=\"table-responsive\">\r\n    <table class=\"table table-striped table-hover table-bordered\">\r\n      <tr>\r\n        <th>Firstname</th>\r\n        <th>Lastname</th>\r\n        <th>Email</th>\r\n        <th>Role</th>\r\n        <th>Delete</th>\r\n      </tr>\r\n      <tr *ngFor=\"let user of employeeService.listUsers\">\r\n        <td>{{user.firstName}}</td>\r\n        <td>{{user.lastName}}</td>\r\n        <td>{{user.email}}</td>\r\n        <td *ngIf= \"user.role === 2\">Manager</td>\r\n        <td *ngIf= \"user.role === 1\">Employee</td>\r\n        <td>\r\n          <button class=\"btn btn-danger\" (click)=\"delete(user)\">Delete</button>\r\n        </td>\r\n      </tr>\r\n    </table>\r\n  </div>\r\n  <button class=\"btn btn-info\" (click)=\"create(user)\">New Employee</button>\r\n  "
 
 /***/ }),
 
@@ -738,10 +772,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var src_app_services_login_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/login.service */ "./src/app/services/login.service.ts");
-/* harmony import */ var src_app_classes_users__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/classes/users */ "./src/app/classes/users.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/index.js");
-
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/index.js");
 
 
 
@@ -758,8 +790,6 @@ var LoginComponent = /** @class */ (function () {
     }
     LoginComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.loginService.currentUser = new src_app_classes_users__WEBPACK_IMPORTED_MODULE_3__["Users"]('Amna', null, null, 2, 1, null);
-        console.log(this.loginService.currentUser.role);
         this.loginResponse = this.loginService.$loginStatus.subscribe(function (status) {
             if (status === 200) {
             }
@@ -767,7 +797,6 @@ var LoginComponent = /** @class */ (function () {
                 _this.lastStatus = status;
             }
         });
-        //this.loginService.currentUser = new Users('Amna', null,null,null,1,null);
     };
     LoginComponent.prototype.ngOnDestroy = function () {
         if (this.loginResponse) {
@@ -819,7 +848,7 @@ var LoginComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./login.component.html */ "./src/app/components/login/login.component.html"),
             styles: [__webpack_require__(/*! ./login.component.css */ "./src/app/components/login/login.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_login_service__WEBPACK_IMPORTED_MODULE_2__["LoginService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], ngx_cookie_service__WEBPACK_IMPORTED_MODULE_5__["CookieService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_login_service__WEBPACK_IMPORTED_MODULE_2__["LoginService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], ngx_cookie_service__WEBPACK_IMPORTED_MODULE_4__["CookieService"]])
     ], LoginComponent);
     return LoginComponent;
 }());
@@ -846,7 +875,7 @@ module.exports = ".nav-link:hover{\r\n    background-color: blueviolet;\r\n}\r\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-sm bg-primary navbar-secondary d-flex justify-content-between\">\r\n  <button class=\"d-lg-none btn btn-outline-secondary\" (click)=\"isCollapsed = !isCollapsed\" [attr.aria-expanded]=\"!isCollapsed\" aria-controls=\"nabvar-content\">\r\n    <img class=\"navbar-toggler-icon\" alt=\"navigation menu\" src=\"./assets/img/hamburger.png\"></button>\r\n  <div id=\"navbar-content\" class=\"d-none d-lg-block\">  \r\n    <ul class=\"navbar-nav\">\r\n      <li class=\"nav-item\" >\r\n        <a routerLink=\"shifts\" class=\"nav-link text-white hover-light\">Schedule</a>\r\n      </li>\r\n        <li class=\"nav-item\"  *ngIf = \"managerValid()\">\r\n            <a routerLink=\"employee\" class=\"nav-link text-white hover-light\">Manage Employees</a>\r\n          </li>\r\n      <li class=\"nav-item\">\r\n\r\n        <a routerLink=\"login\" class=\"nav-link text-white hover-light\">Login</a>\r\n\r\n      <li class=\"nav-item\" *ngIf = \"managerValid()\">\r\n          <a routerLink=\"shift-config\" class=\"nav-link text-white hover-light\">Adding Shifts</a>\r\n        </li>\r\n        <li class=\"nav-item\" >\r\n            <a routerLink=\"employee-create\" class=\"nav-link text-white hover-light\">Signup</a>\r\n          </li>\r\n      <li class=\"nav-item\">\r\n        <a routerLink=\"open\" class=\"nav-link text-white\">Open Shifts</a>\r\n      </li> \r\n      <li class=\"nav-item\" >\r\n        <a (click)=\"logOut()\" routerLink=\"login\" class=\"nav-link text-white hover-light\">Log Out</a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n  <div [collapse]=\"!isCollapsed\" id=\"navbar-content\" class=\"d-lg-none\">  \r\n    <ul class=\"navbar-nav\">\r\n      <li class=\"nav-item\" >\r\n        <a routerLink=\"shifts\" class=\"nav-link text-white hover-light\">Schedule</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a routerLink=\"login\" class=\"nav-link text-white hover-light\">Login</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a routerLink=\"open\" class=\"nav-link text-white hover-light\">Open Shifts</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a routerLink=\"shift-config\" class=\"nav-link text-white hover-light\">Adding Shifts</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a routerLink=\"employee\" class=\"nav-link text-white hover-light\">Employees</a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n  <h1 class=\"h1 text-white d-flex\">Logo Here</h1>\r\n</nav>\r\n"
+module.exports = "<nav class=\"navbar navbar-expand-sm bg-primary navbar-secondary d-flex justify-content-between\">\r\n  <button class=\"d-lg-none btn btn-outline-secondary\" (click)=\"isCollapsed = !isCollapsed\"\r\n    [attr.aria-expanded]=\"!isCollapsed\" aria-controls=\"nabvar-content\">\r\n    <img class=\"navbar-toggler-icon\" alt=\"navigation menu\" src=\"./assets/img/hamburger.png\"></button>\r\n  <div id=\"navbar-content\" class=\"d-none d-lg-block\">\r\n    <ul class=\"navbar-nav\">\r\n      <li class=\"nav-item\">\r\n        <a routerLink=\"shifts\" class=\"nav-link text-white hover-light\">Schedule</a>\r\n      </li>\r\n      <li class=\"nav-item\" *ngIf=\"managerValid()\">\r\n        <a routerLink=\"employee\" class=\"nav-link text-white hover-light\">Manage Employees</a>\r\n      </li>\r\n      <li class=\"nav-item\" *ngIf=\"managerValid()\">\r\n        <a routerLink=\"shift-config\" class=\"nav-link text-white hover-light\">Adding Shifts</a>\r\n      </li>\r\n      <li class=\"nav-item\" *ngIf=\"loginService.loggedIn\">\r\n        <a (click)=\"logOut()\" routerLink=\"login\" class=\"nav-link text-white hover-light\">Log Out</a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n  <div [collapse]=\"!isCollapsed\" id=\"navbar-content\" class=\"d-lg-none\">\r\n    <ul class=\"navbar-nav\">\r\n      <li class=\"nav-item\">\r\n        <a routerLink=\"shifts\" class=\"nav-link text-white hover-light\">Schedule</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a routerLink=\"shift-config\" class=\"nav-link text-white hover-light\">Adding Shifts</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a routerLink=\"employee\" class=\"nav-link text-white hover-light\">Employees</a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n  <h1 class=\"h1 text-white d-flex\">Logo Here</h1>\r\n</nav>"
 
 /***/ }),
 
@@ -922,7 +951,7 @@ module.exports = "#login-wrapper{\r\n    margin-top: 20vh;\r\n    padding: 50px\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"container d-flex justify-content-center\">\r\n     \r\n  <div id=\"login-wrapper\" class=\"col-9 bg-primary\">\r\n      <section class=\"container d-flex justify-content-center\">\r\n      <div class=\"form-group d-flex justify-content-center flex-wrap\">\r\n        <label class=\"form-control-label text-white col-12\" for=\"startTime\">Shift Start Time:</label>\r\n        <input type=\"number\" [(ngModel)]=\"shiftConfig.startTime\">\r\n      \r\n      </div>\r\n      <div class=\"form-group has-danger d-flex justify-content-center flex-wrap\">\r\n        <label class=\"form-control-label text-white col-12\" for=\"endTime\">Shift End Time</label>\r\n        <input type=\"number\" [(ngModel)]=\"shiftConfig.endTime\">\r\n      </div>\r\n    </section>\r\n   <hr>\r\n      <section class=\"container d-flex justify-content-center\">\r\n    <div class=\"form-check justify-content-center\">\r\n      <label class=\"form-check-label text-white col-12\">\r\n        <input name=\"optionsRadios\" class=\"form-check-input\" type=\"checkbox\"  [(ngModel)]=\"shiftConfig.weekdays.monday\" [ngModelOptions]=\"{standalone: true}\" checked=\"\" value=\"1\">\r\n        Monday\r\n      </label>\r\n    </div>\r\n    <div class=\"form-check\">\r\n      <label class=\"form-check-label text-white col-12\">\r\n        <input name=\"optionsRadios\" class=\"form-check-input\" type=\"checkbox\" [(ngModel)]=\"shiftConfig.weekdays.tuesday\" [ngModelOptions]=\"{standalone: true}\" checked=\"\" value=\"2\">\r\n        Tuesday\r\n      </label>\r\n    </div>\r\n    <div class=\"form-check\">\r\n      <label class=\"form-check-label text-white col-12\">\r\n        <input name=\"optionsRadios\" class=\"form-check-input\" type=\"checkbox\" [(ngModel)]=\"shiftConfig.weekdays.wednesday\" [ngModelOptions]=\"{standalone: true}\" checked=\"\" value=\"3\">\r\n        Wednesday\r\n      </label>\r\n    </div>\r\n    <div class=\"form-check\">\r\n      <label class=\"form-check-label text-white col-12\">\r\n        <input name=\"optionsRadios\" class=\"form-check-input\" type=\"checkbox\" [(ngModel)]=\"shiftConfig.weekdays.thursday\" [ngModelOptions]=\"{standalone: true}\" checked=\"\" value=\"4\">\r\n        Thursday\r\n      </label>\r\n    </div>\r\n    <div class=\"form-check\">\r\n      <label class=\"form-check-label text-white col-12\">\r\n        <input name=\"optionsRadios\" class=\"form-check-input\" type=\"checkbox\" [(ngModel)]=\"shiftConfig.weekdays.friday\" [ngModelOptions]=\"{standalone: true}\" checked=\"\" value=\"5\">\r\n        Friday\r\n      </label>\r\n    </div>\r\n    <div class=\"form-check\">\r\n      <label class=\"form-check-label text-white col-12\">\r\n        <input name=\"optionsRadios\" class=\"form-check-input\" type=\"checkbox\" [(ngModel)]=\"shiftConfig.weekdays.saturday\" [ngModelOptions]=\"{standalone: true}\" checked=\"\" value=\"6\">\r\n        Saturday\r\n      </label>\r\n    </div>\r\n    <div class=\"form-check\">\r\n      <label class=\"form-check-label text-white col-12\">\r\n        <input name=\"optionsRadios\" class=\"form-check-input\" type=\"checkbox\" [(ngModel)]=\"shiftConfig.weekdays.sunday\" [ngModelOptions]=\"{standalone: true}\" checked=\"\" value=\"7\">\r\n        Sunday\r\n      </label>\r\n    </div>\r\n</section>\r\n<hr>\r\n   <div class=\"d-flex justify-content-center col-12\">\r\n      <input class=\"btn btn-outline-light\" type=\"submit\" (click)=\"submit()\">\r\n    </div>\r\n  </div>\r\n  </section>\r\n  \r\n  \r\n  "
+module.exports = "<section class=\"container d-flex justify-content-center\">\r\n\r\n  <div id=\"login-wrapper\" class=\"col-9 bg-primary\">\r\n    <section class=\"container d-flex justify-content-center\">\r\n      <div class=\"form-group d-flex justify-content-center flex-wrap\">\r\n        <label class=\"form-control-label text-white col-12\" for=\"startTime\">Shift Start Time</label>\r\n        <select [(ngModel)]=\"shiftConfig.startTime\" [ngModelOptions]=\"{standalone: true}\">\r\n          <option value=\"24\">12AM</option>\r\n          <option value=\"1\">1AM</option>\r\n          <option value=\"2\">2AM</option>\r\n          <option value=\"3\">3AM</option>\r\n          <option value=\"4\">4AM</option>\r\n          <option value=\"5\">5AM</option>\r\n          <option value=\"6\">6AM</option>\r\n          <option value=\"7\">7AM</option>\r\n          <option value=\"8\">8AM</option>\r\n          <option value=\"9\">9AM</option>\r\n          <option value=\"10\">10AM</option>\r\n          <option value=\"11\">11AM</option>\r\n          <option value=\"12\">12PM</option>\r\n          <option value=\"13\">1PM</option>\r\n          <option value=\"14\">2PM</option>\r\n          <option value=\"15\">3PM</option>\r\n          <option value=\"16\">4PM</option>\r\n          <option value=\"17\">5PM</option>\r\n          <option value=\"18\">6PM</option>\r\n          <option value=\"19\">7PM</option>\r\n          <option value=\"20\">8PM</option>\r\n          <option value=\"21\">9PM</option>\r\n          <option value=\"22\">10PM</option>\r\n          <option value=\"23\">11PM</option>\r\n        </select>\r\n\r\n      </div>\r\n      <div class=\"form-group has-danger d-flex justify-content-center flex-wrap\">\r\n        <label class=\"form-control-label text-white col-12\" for=\"endTime\">Shift End Time</label>\r\n        <select [(ngModel)]=\"shiftConfig.endTime\" [ngModelOptions]=\"{standalone: true}\">\r\n          <option value=\"24\">12AM</option>\r\n          <option value=\"1\">1AM</option>\r\n          <option value=\"2\">2AM</option>\r\n          <option value=\"3\">3AM</option>\r\n          <option value=\"4\">4AM</option>\r\n          <option value=\"5\">5AM</option>\r\n          <option value=\"6\">6AM</option>\r\n          <option value=\"7\">7AM</option>\r\n          <option value=\"8\">8AM</option>\r\n          <option value=\"9\">9AM</option>\r\n          <option value=\"10\">10AM</option>\r\n          <option value=\"11\">11AM</option>\r\n          <option value=\"12\">12PM</option>\r\n          <option value=\"13\">1PM</option>\r\n          <option value=\"14\">2PM</option>\r\n          <option value=\"15\">3PM</option>\r\n          <option value=\"16\">4PM</option>\r\n          <option value=\"17\">5PM</option>\r\n          <option value=\"18\">6PM</option>\r\n          <option value=\"19\">7PM</option>\r\n          <option value=\"20\">8PM</option>\r\n          <option value=\"21\">9PM</option>\r\n          <option value=\"22\">10PM</option>\r\n          <option value=\"23\">11PM</option>\r\n        </select>\r\n      </div>\r\n    </section>\r\n   <hr>\r\n      <section class=\"container d-flex justify-content-center flex-column\">\r\n    <div class=\"form-check justify-content-center\">\r\n      <label class=\"form-check-label text-white col-12\">\r\n        <input name=\"optionsRadios\" class=\"form-check-input\" type=\"checkbox\"  [(ngModel)]=\"shiftConfig.weekdays.monday\" [ngModelOptions]=\"{standalone: true}\" checked=\"\" value=\"1\">\r\n        Monday\r\n      </label>\r\n    </div>\r\n    <div class=\"form-check\">\r\n      <label class=\"form-check-label text-white col-12\">\r\n        <input name=\"optionsRadios\" class=\"form-check-input\" type=\"checkbox\" [(ngModel)]=\"shiftConfig.weekdays.tuesday\" [ngModelOptions]=\"{standalone: true}\" checked=\"\" value=\"2\">\r\n        Tuesday\r\n      </label>\r\n    </div>\r\n    <div class=\"form-check\">\r\n      <label class=\"form-check-label text-white col-12\">\r\n        <input name=\"optionsRadios\" class=\"form-check-input\" type=\"checkbox\" [(ngModel)]=\"shiftConfig.weekdays.wednesday\" [ngModelOptions]=\"{standalone: true}\" checked=\"\" value=\"3\">\r\n        Wednesday\r\n      </label>\r\n    </div>\r\n    <div class=\"form-check\">\r\n      <label class=\"form-check-label text-white col-12\">\r\n        <input name=\"optionsRadios\" class=\"form-check-input\" type=\"checkbox\" [(ngModel)]=\"shiftConfig.weekdays.thursday\" [ngModelOptions]=\"{standalone: true}\" checked=\"\" value=\"4\">\r\n        Thursday\r\n      </label>\r\n    </div>\r\n    <div class=\"form-check\">\r\n      <label class=\"form-check-label text-white col-12\">\r\n        <input name=\"optionsRadios\" class=\"form-check-input\" type=\"checkbox\" [(ngModel)]=\"shiftConfig.weekdays.friday\" [ngModelOptions]=\"{standalone: true}\" checked=\"\" value=\"5\">\r\n        Friday\r\n      </label>\r\n    </div>\r\n    <div class=\"form-check\">\r\n      <label class=\"form-check-label text-white col-12\">\r\n        <input name=\"optionsRadios\" class=\"form-check-input\" type=\"checkbox\" [(ngModel)]=\"shiftConfig.weekdays.saturday\" [ngModelOptions]=\"{standalone: true}\" checked=\"\" value=\"6\">\r\n        Saturday\r\n      </label>\r\n    </div>\r\n    <div class=\"form-check\">\r\n      <label class=\"form-check-label text-white col-12\">\r\n        <input name=\"optionsRadios\" class=\"form-check-input\" type=\"checkbox\" [(ngModel)]=\"shiftConfig.weekdays.sunday\" [ngModelOptions]=\"{standalone: true}\" checked=\"\" value=\"7\">\r\n        Sunday\r\n      </label>\r\n    </div>\r\n</section>\r\n<hr>\r\n   <div class=\"d-flex justify-content-center col-12\">\r\n      <input class=\"btn btn-outline-light\" type=\"submit\" (click)=\"submit()\">\r\n    </div>\r\n  </div>\r\n</section>"
 
 /***/ }),
 
@@ -942,9 +971,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_classes_ShiftConfig__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/classes/ShiftConfig */ "./src/app/classes/ShiftConfig.ts");
 /* harmony import */ var src_app_classes_WeekDays__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/classes/WeekDays */ "./src/app/classes/WeekDays.ts");
 /* harmony import */ var src_app_services_shift_config_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/shift-config.service */ "./src/app/services/shift-config.service.ts");
-/* harmony import */ var src_app_classes_users__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/classes/users */ "./src/app/classes/users.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 
 
 
@@ -960,15 +987,12 @@ var ShiftConfigComponent = /** @class */ (function () {
         this.shiftConfig = new src_app_classes_ShiftConfig__WEBPACK_IMPORTED_MODULE_3__["ShiftConfig"](null, null, null, new src_app_classes_WeekDays__WEBPACK_IMPORTED_MODULE_4__["WeekDays"](false, false, false, false, false, false, false), null);
     }
     ShiftConfigComponent.prototype.ngOnInit = function () {
-        console.log(this.loginService.currentUser.role);
         if (!this.loginService.getLoggedIn()) {
             this.router.navigateByUrl('login');
         }
-        console.log(this.loginService.currentUser.firstName);
-        this.sampleUser = new src_app_classes_users__WEBPACK_IMPORTED_MODULE_6__["Users"]('Monty', 'Python', 'monty@python.org', 1, 1);
     };
     ShiftConfigComponent.prototype.submit = function () {
-        this.shiftConfig.users = this.sampleUser;
+        this.shiftConfig.users = this.loginService.currentUser;
         this.shiftConfigService.postShiftConfig(this.shiftConfig);
     };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -981,7 +1005,7 @@ var ShiftConfigComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./shift-config.component.html */ "./src/app/components/shift-config/shift-config.component.html"),
             styles: [__webpack_require__(/*! ./shift-config.component.css */ "./src/app/components/shift-config/shift-config.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_login_service__WEBPACK_IMPORTED_MODULE_2__["LoginService"], _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"], src_app_services_shift_config_service__WEBPACK_IMPORTED_MODULE_5__["ShiftConfigService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_login_service__WEBPACK_IMPORTED_MODULE_2__["LoginService"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"], src_app_services_shift_config_service__WEBPACK_IMPORTED_MODULE_5__["ShiftConfigService"]])
     ], ShiftConfigComponent);
     return ShiftConfigComponent;
 }());
@@ -1071,7 +1095,7 @@ var ShiftpoolComponent = /** @class */ (function () {
         else {
             this.weekOrDay = 'Week';
         }
-        this.shiftService.setEmployees();
+        this.shiftService.fetchEmployees();
         this.currentEmployees = this.shiftService.getEmployees();
         console.log(this.currentEmployees);
     };
@@ -1241,7 +1265,7 @@ module.exports = ".day{\r\n    height: 72vh;\r\n    width: 100%;\r\n    margin: 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"col-12 bg-secondary\">\r\n  <div class=\"col-12 d-flex flex-row justify-content-between\">\r\n    <button click=\"previous()\" class=\"btn btn-light\">Previous {{ weekOrDay }}</button>\r\n    <h1 class=\"h1 text-center text-white\">Shifts</h1>\r\n    <button (click)=\"next()\" class=\"btn btn-light\">Next {{ weekOrDay }}</button>\r\n  </div>\r\n  <div class=\"d-flex flex-row col-12\">\r\n    <div class=\"col-1\"></div>\r\n    <div class=\"col-11 d-flex flex-row justify-content-between\">\r\n        <h5 *ngIf=\"isCurrentDay(0)\" class=\"day-date text-center text-white\">{{ weekdays[0] }} </h5>\r\n        <h5 *ngIf=\"isCurrentDay(1)\" class=\"day-date text-center text-white\">{{ weekdays[1] }} </h5>\r\n        <h5 *ngIf=\"isCurrentDay(2)\" class=\"day-date text-center text-white\">{{ weekdays[2] }} </h5>\r\n        <h5 *ngIf=\"isCurrentDay(3)\" class=\"day-date text-center text-white\">{{ weekdays[3] }} </h5>\r\n        <h5 *ngIf=\"isCurrentDay(4)\" class=\"day-date text-center text-white\">{{ weekdays[4] }} </h5>\r\n        <h5 *ngIf=\"isCurrentDay(5)\" class=\"day-date text-center text-white\">{{ weekdays[5] }} </h5>\r\n        <h5 *ngIf=\"isCurrentDay(6)\" class=\"day-date text-center text-white\">{{ weekdays[6] }} </h5>\r\n    </div>\r\n  </div>\r\n  <div class=\"d-flex flex-row\">\r\n    <div class=\"d-flex flex-column justify-content-between hours col-1\">\r\n      <table>\r\n        <tbody>\r\n          <tr>\r\n            <td>12a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>1a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>2a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>3a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>4a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>5a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>6a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>7a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>8a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>9a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>10a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>11a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>12p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>1p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>2p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>3p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>4p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>5p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>6p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>7p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>8p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>9p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>10p</td>\r\n          </tr>\r\n          <tr class=\"lasttr\">\r\n            <td>11p</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n    <div class=\"shifts-wrapper col-11 d-flex flex-row justify-content-between bg-light\">\r\n      <div *ngIf=\"isCurrentDay(0)\" class=\"day\">\r\n        <div *ngFor=\"let shift of daysAsList[0]?.shifts\" [class.empty]=\"shift.isEmptyShift\" class=\"shift\" \r\n          (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\"> \r\n          <ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.user.firstName + ' ' + employee.user.lastName }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"isCurrentDay(1)\" class=\"day\">\r\n        <div *ngFor=\"let shift of daysAsList[1]?.shifts\" [class.empty]=\"shift.isEmptyShift\" class=\"shift\" \r\n        (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\" >\r\n        <ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.user.firstName + ' ' + employee.user.lastName }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"isCurrentDay(2)\" class=\"day\">\r\n        <div *ngFor=\"let shift of daysAsList[2]?.shifts\" [class.empty]=\"shift.isEmptyShift\" class=\"shift\" \r\n        (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\">\r\n        <ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.user.firstName + ' ' + employee.user.lastName }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"isCurrentDay(3)\" class=\"day\">\r\n        <div *ngFor=\"let shift of daysAsList[3]?.shifts\" [class.empty]=\"shift.isEmptyShift\" class=\"shift\" \r\n        (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\"><ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.user.firstName + ' ' + employee.user.lastName }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"isCurrentDay(4)\" class=\"day\">\r\n        <div *ngFor=\"let shift of daysAsList[4]?.shifts\" class=\"shift\" [class.empty]=\"shift.isEmptyShift\"\r\n        (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\"><ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.user.firstName + ' ' + employee.user.lastName }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"isCurrentDay(5)\" class=\"day\">\r\n        <div *ngFor=\"let shift of daysAsList[5]?.shifts\" class=\"shift\" [class.empty]=\"shift.isEmptyShift\"\r\n        (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\"><ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.user.firstName + ' ' + employee.user.lastName }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"isCurrentDay(6)\" class=\"day\">\r\n        <div *ngFor=\"let shift of daysAsList[6]?.shifts\" class=\"shift\" [class.empty]=\"shift.isEmptyShift\"\r\n        (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\"><ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.user.firstName + ' ' + employee.user.lastName }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <ng-template #template>\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title pull-left\">Shift</h4>\r\n        <button type=\"button\" class=\"close pull-right\" aria-label=\"Close\" (click)=\"modalRef.hide()\">\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <div class=\"col-12\">Start Time: {{ clickedShift.startHour }}</div>\r\n        <div class=\"col-12\">End Time: {{ clickedShift.endHour }}</div>\r\n        <div *ngFor=\"let employee of clickedShift.employees\" class=\"col-12 d-flex justify-content-between\">\r\n          Employee: {{ employee.username }}\r\n          <button *ngIf=\"isitEditMode()\" (click)=\"delete(employee.username)\" class=\"btn btn-danger\">Delete</button>\r\n        </div>\r\n        <div class=\"form-group\" *ngIf=\"isManager() && isitEditMode()\">\r\n          <select (change)=\"changeEmployee($event)\" class=\"form-control\">\r\n            <option [style.display]=\"employeeIsAlreadyAssigned(employee)\"\r\n              *ngFor=\"let employee of currentEmployees\">\r\n              {{ employee.username }}\r\n            </option>\r\n          </select>\r\n        </div>\r\n        <button (click)=\"edit()\" *ngIf=\"!isitEditMode()\" class=\"btn btn-danger\">Edit</button>\r\n        <button (click)=\"save()\" *ngIf=\"isitEditMode()\" class=\"btn btn-success\">Save</button>\r\n      </div>\r\n    </ng-template>\r\n  </div>\r\n  <div class=\"d-flex justify-content-center col-12\">\r\n    <button class=\"btn btn-success\" (click)=\"submitWeek()\" [disabled]=\"!isChanged()\">Yoyoyoyo</button>\r\n  </div>\r\n</section>"
+module.exports = "<section class=\"col-12 bg-secondary\">\r\n  <div class=\"col-12 d-flex flex-row justify-content-between\">\r\n    <button click=\"previous()\" class=\"btn btn-light\">Previous {{ weekOrDay }}</button>\r\n    <h1 class=\"h1 text-center text-white\">Shifts</h1>\r\n    <button (click)=\"next()\" class=\"btn btn-light\">Next {{ weekOrDay }}</button>\r\n  </div>\r\n  <div class=\"d-flex flex-row col-12\">\r\n    <div class=\"col-1\"></div>\r\n    <div class=\"col-11 d-flex flex-row justify-content-between\">\r\n        <h5 *ngIf=\"isCurrentDay(0)\" class=\"day-date text-center text-white\">{{ weekdays[0] }} </h5>\r\n        <h5 *ngIf=\"isCurrentDay(1)\" class=\"day-date text-center text-white\">{{ weekdays[1] }} </h5>\r\n        <h5 *ngIf=\"isCurrentDay(2)\" class=\"day-date text-center text-white\">{{ weekdays[2] }} </h5>\r\n        <h5 *ngIf=\"isCurrentDay(3)\" class=\"day-date text-center text-white\">{{ weekdays[3] }} </h5>\r\n        <h5 *ngIf=\"isCurrentDay(4)\" class=\"day-date text-center text-white\">{{ weekdays[4] }} </h5>\r\n        <h5 *ngIf=\"isCurrentDay(5)\" class=\"day-date text-center text-white\">{{ weekdays[5] }} </h5>\r\n        <h5 *ngIf=\"isCurrentDay(6)\" class=\"day-date text-center text-white\">{{ weekdays[6] }} </h5>\r\n    </div>\r\n  </div>\r\n  <div class=\"d-flex flex-row\">\r\n    <div class=\"d-flex flex-column justify-content-between hours col-1\">\r\n      <table>\r\n        <tbody>\r\n          <tr>\r\n            <td>12a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>1a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>2a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>3a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>4a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>5a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>6a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>7a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>8a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>9a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>10a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>11a</td>\r\n          </tr>\r\n          <tr>\r\n            <td>12p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>1p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>2p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>3p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>4p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>5p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>6p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>7p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>8p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>9p</td>\r\n          </tr>\r\n          <tr>\r\n            <td>10p</td>\r\n          </tr>\r\n          <tr class=\"lasttr\">\r\n            <td>11p</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n    <div class=\"shifts-wrapper col-11 d-flex flex-row justify-content-between bg-light\">\r\n      <div *ngIf=\"isCurrentDay(0)\" class=\"day\">\r\n        <div *ngFor=\"let shift of daysAsList[0]?.shifts\" [class.empty]=\"shift.isEmptyShift\" class=\"shift\" \r\n          (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\"> \r\n          <ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.user.firstName + ' ' + employee.user.lastName }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"isCurrentDay(1)\" class=\"day\">\r\n        <div *ngFor=\"let shift of daysAsList[1]?.shifts\" [class.empty]=\"shift.isEmptyShift\" class=\"shift\" \r\n        (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\" >\r\n        <ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.user.firstName + ' ' + employee.user.lastName }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"isCurrentDay(2)\" class=\"day\">\r\n        <div *ngFor=\"let shift of daysAsList[2]?.shifts\" [class.empty]=\"shift.isEmptyShift\" class=\"shift\" \r\n        (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\">\r\n        <ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.user.firstName + ' ' + employee.user.lastName }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"isCurrentDay(3)\" class=\"day\">\r\n        <div *ngFor=\"let shift of daysAsList[3]?.shifts\" [class.empty]=\"shift.isEmptyShift\" class=\"shift\" \r\n        (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\"><ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.user.firstName + ' ' + employee.user.lastName }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"isCurrentDay(4)\" class=\"day\">\r\n        <div *ngFor=\"let shift of daysAsList[4]?.shifts\" class=\"shift\" [class.empty]=\"shift.isEmptyShift\"\r\n        (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\"><ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.user.firstName + ' ' + employee.user.lastName }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"isCurrentDay(5)\" class=\"day\">\r\n        <div *ngFor=\"let shift of daysAsList[5]?.shifts\" class=\"shift\" [class.empty]=\"shift.isEmptyShift\"\r\n        (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\"><ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.user.firstName + ' ' + employee.user.lastName }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"isCurrentDay(6)\" class=\"day\">\r\n        <div *ngFor=\"let shift of daysAsList[6]?.shifts\" class=\"shift\" [class.empty]=\"shift.isEmptyShift\"\r\n        (click)=\"openModal(template, shift)\" [style.height]=\"getHeight(shift)\"><ul class=\"emps-list\">\r\n            <li class=\"emps\" *ngFor=\"let employee of shift.employees\">{{ employee.user.firstName + ' ' + employee.user.lastName }}</li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <ng-template #template>\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title pull-left\">Shift</h4>\r\n        <button type=\"button\" class=\"close pull-right\" aria-label=\"Close\" (click)=\"modalRef.hide()\">\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <div class=\"col-12\">Start Time: {{ clickedShift.startHour }}</div>\r\n        <div class=\"col-12\">End Time: {{ clickedShift.endHour }}</div>\r\n        <div class=\"col-12\">\r\n          <p class=\"col-12\">Assigned Employees:</p>\r\n          <ul class=\"col-12 emps-list\">\r\n            <li class=\"col-12 emps d-flex justify-content-between bg-secondary\" *ngFor=\"let employee of clickedShift.employees\">\r\n              {{ employee.username }}\r\n              <button *ngIf=\"isitEditMode()\" (click)=\"delete(employee.username)\" class=\"btn btn-danger\">Delete</button>\r\n            </li>\r\n          </ul> \r\n        </div>\r\n        <div class=\"form-group\" *ngIf=\"isManager() && isitEditMode()\">\r\n          <select (change)=\"changeEmployee($event)\" class=\"form-control\">\r\n            <option selected=\"selected\"> </option>\r\n            <option [style.display]=\"employeeIsAlreadyAssigned(employee)\"\r\n              *ngFor=\"let employee of currentEmployees\">\r\n              {{ employee.username }}\r\n            </option>\r\n          </select>\r\n        </div>\r\n        <button (click)=\"edit()\" *ngIf=\"!isitEditMode()\" class=\"btn btn-danger\">Edit</button>\r\n        <button (click)=\"save()\" *ngIf=\"isitEditMode()\" class=\"btn btn-success\">Save</button>\r\n      </div>\r\n    </ng-template>\r\n  </div>\r\n  <div class=\"d-flex justify-content-center col-12\">\r\n    <button class=\"btn btn-success\" (click)=\"submitWeek()\" [disabled]=\"!isChanged()\">Submit</button>\r\n  </div>\r\n</section>"
 
 /***/ }),
 
@@ -1303,11 +1327,15 @@ var ShiftsComponent = /** @class */ (function () {
         }
         this.currentWeek = this.genSampleData();
         // this.daysAsList = this.convertToArray(this.currentWeek.days);
-        this.shiftService.fetchCurrentWeekById(22);
+        this.shiftService.fetchCurrentWeekById(25);
         this.shiftService.$shiftStatus.subscribe(function (status) {
             if (status === 200) {
                 _this.loaded = true;
                 _this.populateShifts();
+            }
+            else if (status === 201) {
+                _this.currentEmployees = _this.shiftService.getEmployees();
+                console.log(_this.currentEmployees);
             }
             else {
             }
@@ -1322,8 +1350,7 @@ var ShiftsComponent = /** @class */ (function () {
         this.daysAsList.forEach(function (day) {
             _this.weekdays.push(_this.formartToUsableDate(day.date));
         });
-        this.shiftService.setEmployees();
-        this.currentEmployees = this.shiftService.getEmployees();
+        this.shiftService.fetchEmployees();
     };
     ShiftsComponent.prototype.openModal = function (template, shift) {
         this.clickedShift = shift;
@@ -1457,6 +1484,7 @@ var ShiftsComponent = /** @class */ (function () {
                 this.clickedShift.employees.splice(index, 1);
             }
         }
+        this.isitChanged = true;
     };
     ShiftsComponent.prototype.isChanged = function () {
         return this.isitChanged;
@@ -1491,13 +1519,29 @@ var ShiftsComponent = /** @class */ (function () {
         return map;
     };
     ShiftsComponent.prototype.submitWeek = function () {
-        var days = this.convertToMap(this.daysAsList, this.currentWeek.days);
-        this.currentWeek.days = days;
+        var cleanDays = this.daysAsList;
+        cleanDays = this.removeFillerShifts(cleanDays);
+        var days = this.convertToMap(cleanDays, this.currentWeek.days);
+        var week = this.currentWeek;
+        week.days = days;
         this.shiftService.sendUpdatedWeek(this.currentWeek);
+        this.isitChanged = false;
+        this.daysAsList = this.generateFillerShifts(this.daysAsList);
     };
     ShiftsComponent.prototype.genSampleData = function () {
         var week = new src_app_classes_week__WEBPACK_IMPORTED_MODULE_2__["Week"](/*days*/ null, 1, new Date(Date.now()));
         return week;
+    };
+    ShiftsComponent.prototype.removeFillerShifts = function (days) {
+        days.forEach(function (day) {
+            day.shifts.forEach(function (shift) {
+                if (shift.isEmptyShift) {
+                    var index = day.shifts.indexOf(shift);
+                    day.shifts.splice(index, 1);
+                }
+            });
+        });
+        return days;
     };
     ShiftsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1742,16 +1786,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _classes_env__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../classes/env */ "./src/app/classes/env.ts");
+
 
 
 
 var EmployeeService = /** @class */ (function () {
-    function EmployeeService(httpClient) {
+    function EmployeeService(httpClient, env) {
         this.httpClient = httpClient;
+        this.env = env;
     }
     EmployeeService.prototype.getAllUsers = function () {
         var _this = this;
-        this.httpClient.get('http://localhost:8081/people', {
+        this.httpClient.get(this.env.getProdUrl() + '/people', {
             observe: 'response'
         }).subscribe(function (response) {
             var user = JSON.stringify(response.body);
@@ -1763,7 +1810,7 @@ var EmployeeService = /** @class */ (function () {
     EmployeeService.prototype.deleteUser = function (user) {
         var _this = this;
         console.log(user);
-        this.httpClient.delete('http://localhost:8081/people/' + user.user_id, {
+        this.httpClient.delete(this.env.getProdUrl() + '/people/' + user.user_id, {
             observe: 'response'
         }).subscribe(function (response) {
             console.log(response.body);
@@ -1771,20 +1818,25 @@ var EmployeeService = /** @class */ (function () {
             if (index > -1) {
                 _this.listUsers.splice(index, 1);
             }
+            return true;
         }, function (err) {
             console.log(err);
+            if (err.status === 403) {
+                return false;
+            }
         });
+        return null;
     };
     EmployeeService.prototype.createUser = function (cred) {
         var _this = this;
-        console.log(cred);
-        this.httpClient.post('http://localhost:8081/cred/create', cred, {
+        this.httpClient.post(this.env.getProdUrl() + '/cred/create', cred, {
             observe: 'response'
         }).subscribe(function (response) {
             var user = JSON.stringify(response.body);
             console.log(user);
             _this.listUsers.push(JSON.parse(user));
         }, function (err) {
+            console.log('Error thrown');
             console.log(err);
         });
     };
@@ -1792,7 +1844,7 @@ var EmployeeService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
             providedIn: 'root'
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _classes_env__WEBPACK_IMPORTED_MODULE_3__["Env"]])
     ], EmployeeService);
     return EmployeeService;
 }());
@@ -1817,6 +1869,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _classes_env__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../classes/env */ "./src/app/classes/env.ts");
+
 
 
 
@@ -1824,9 +1878,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var LoginService = /** @class */ (function () {
-    function LoginService(httpClient, cookieService) {
+    function LoginService(httpClient, cookieService, env) {
         this.httpClient = httpClient;
         this.cookieService = cookieService;
+        this.env = env;
         this.loginStatusSubject = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
         this.$loginStatus = this.loginStatusSubject.asObservable();
         this.loggedIn = false;
@@ -1837,12 +1892,11 @@ var LoginService = /** @class */ (function () {
             username: username,
             password: password
         };
-        this.httpClient.post('http://localhost:8081/cred/login', payload, {
+        this.httpClient.post(this.env.getProdUrl() + '/cred/login', payload, {
             observe: 'response',
         }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (response) { return response.body; }))
             .subscribe(function (response) {
             _this.currentUser = response;
-            console.log(_this.currentUser.token);
             _this.cookieService.set('role', _this.currentUser.role.toString());
             _this.loggedIn = true;
             _this.loginStatusSubject.next(200);
@@ -1860,7 +1914,7 @@ var LoginService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
             providedIn: 'root'
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"], ngx_cookie_service__WEBPACK_IMPORTED_MODULE_4__["CookieService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"], ngx_cookie_service__WEBPACK_IMPORTED_MODULE_4__["CookieService"], _classes_env__WEBPACK_IMPORTED_MODULE_6__["Env"]])
     ], LoginService);
     return LoginService;
 }());
@@ -1883,25 +1937,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _classes_env__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../classes/env */ "./src/app/classes/env.ts");
+
 
 
 
 
 var ShiftConfigService = /** @class */ (function () {
-    function ShiftConfigService(httpClient) {
+    function ShiftConfigService(httpClient, env) {
         this.httpClient = httpClient;
+        this.env = env;
         this.shiftConfigStatusSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
         this.$shiftStatus = this.shiftConfigStatusSubject.asObservable();
     }
     ShiftConfigService.prototype.postShiftConfig = function (payload) {
         var _this = this;
         console.log(payload);
-        this.httpClient.post('http://localhost:8081/config', payload, {
+        this.httpClient.post(this.env.getProdUrl() + '/config', payload, {
             observe: 'response',
         }).subscribe(function (response) {
             _this.shiftConfigStatusSubject.next(200);
-            console.log('We made it');
-            console.log(payload);
         }, function (err) {
             _this.shiftConfigStatusSubject.next(err.status);
         });
@@ -1910,7 +1965,7 @@ var ShiftConfigService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
             providedIn: 'root'
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _classes_env__WEBPACK_IMPORTED_MODULE_4__["Env"]])
     ], ShiftConfigService);
     return ShiftConfigService;
 }());
@@ -1934,10 +1989,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/internal/operators/map */ "./node_modules/rxjs/internal/operators/map.js");
 /* harmony import */ var rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _classes_users__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../classes/users */ "./src/app/classes/users.ts");
-/* harmony import */ var _classes_credentials__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../classes/credentials */ "./src/app/classes/credentials.ts");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _classes_env__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../classes/env */ "./src/app/classes/env.ts");
 
 
 
@@ -1945,27 +1998,27 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ShiftService = /** @class */ (function () {
-    function ShiftService(httpClient) {
+    function ShiftService(httpClient, env) {
         this.httpClient = httpClient;
-        this.shiftStatusSubject = new rxjs__WEBPACK_IMPORTED_MODULE_6__["Subject"]();
+        this.env = env;
+        this.shiftStatusSubject = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
         this.$shiftStatus = this.shiftStatusSubject.asObservable();
     }
-    ShiftService.prototype.fetchNextWeek = function (currentWeek) {
-        var _this = this;
-        this.httpClient.get("http://localhost:8080/week/" + currentWeek.startDate, {
-            observe: 'response',
-        }).pipe(Object(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3__["map"])(function (response) { return response.body; }))
-            .subscribe(function (response) {
-            // this.loginStatusSubject.next(200);
-            _this.nextWeek = response;
-        }, function (err) {
-            // this.loginStatusSubject.next(err.status);
-        });
-    };
+    /*private fetchNextWeek(currentWeek: Week): void {
+      this.httpClient.get(`http://localhost:8080/week/${currentWeek.startDate}`, {
+        observe: 'response',
+      }).pipe(map(response => response.body as Week))
+      .subscribe(response => {
+        // this.loginStatusSubject.next(200);
+        this.nextWeek = response;
+      }, err => {
+        // this.loginStatusSubject.next(err.status);
+      });
+    }*/
     // This method is only run on component init
     ShiftService.prototype.fetchCurrentWeekById = function (id) {
         var _this = this;
-        this.httpClient.get("http://localhost:8081/week/" + id, {
+        this.httpClient.get(this.env.getProdUrl() + ("/week/" + id), {
             observe: 'response',
         }).pipe(Object(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3__["map"])(function (response) { return response.body; }))
             .subscribe(function (response) {
@@ -1977,26 +2030,39 @@ var ShiftService = /** @class */ (function () {
             _this.shiftStatusSubject.next(err.status);
         });
     };
-    ShiftService.prototype.fetchPreviousWeek = function (currentWeek) {
-        var _this = this;
-        this.httpClient.get("http://localhost:8080/week/" + currentWeek.startDate, {
-            observe: 'response',
-        }).pipe(Object(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3__["map"])(function (response) { return response.body; }))
-            .subscribe(function (response) {
-            _this.shiftStatusSubject.next(200);
-            _this.previousWeek = response;
-        }, function (err) {
-            _this.shiftStatusSubject.next(err.status);
-        });
-    };
+    /*private fetchPreviousWeek(currentWeek: Week) {
+      this.httpClient.get(`http://localhost:8080/week/${currentWeek.startDate}`, {
+        observe: 'response',
+      }).pipe(map(response => response.body as Week))
+      .subscribe(response => {
+        this.shiftStatusSubject.next(200);
+        this.previousWeek = response;
+      }, err => {
+        this.shiftStatusSubject.next(err.status);
+      });
+    }*/
     ShiftService.prototype.sendUpdatedWeek = function (week) {
         var _this = this;
-        this.httpClient.put('http://localhost:8081/week', week, {
+        this.httpClient.put(this.env.getProdUrl() + '/week', week, {
             observe: 'response',
         }).subscribe(function (response) {
             if (response.status === 200) {
                 _this.shiftStatusSubject.next(200);
             }
+        });
+    };
+    ShiftService.prototype.fetchEmployees = function () {
+        var _this = this;
+        this.httpClient.get(this.env.getProdUrl + '/cred', {
+            observe: 'response',
+        }).pipe(Object(rxjs_internal_operators_map__WEBPACK_IMPORTED_MODULE_3__["map"])(function (response) { return response.body; }))
+            .subscribe(function (response) {
+            console.log('response:'); // Testing to make sure this is working
+            console.log(response);
+            _this.employees = response;
+            _this.shiftStatusSubject.next(201); // yes I know this isn't good practice, but we need this to work right now
+        }, function (err) {
+            _this.shiftStatusSubject.next(err.status);
         });
     };
     ShiftService.prototype.getCurrentWeek = function () {
@@ -2006,29 +2072,22 @@ var ShiftService = /** @class */ (function () {
     ShiftService.prototype.gotoNextWeek = function () {
         this.previousWeek = this.currentWeek;
         this.currentWeek = this.nextWeek;
-        this.fetchNextWeek(this.currentWeek); // this method sets nextweek
+        //this.fetchNextWeek(this.currentWeek); // this method sets nextweek
     };
     // Iterates through saved weeks backwords
     ShiftService.prototype.gotoPreviousWeek = function () {
         this.nextWeek = this.currentWeek;
         this.currentWeek = this.previousWeek;
-        this.fetchPreviousWeek(this.currentWeek); // this method sets previous week;
+        //this.fetchPreviousWeek(this.currentWeek); // this method sets previous week;
     };
     ShiftService.prototype.getEmployees = function () {
         return this.employees;
-    };
-    ShiftService.prototype.setEmployees = function () {
-        var bob = new _classes_credentials__WEBPACK_IMPORTED_MODULE_5__["Credentials"]('billyboy', 'aoishgoihsgohap dhgap0sygsadgh', 'bobsath', new _classes_users__WEBPACK_IMPORTED_MODULE_4__["Users"]('Bob', 'Sather', 'bobsather@gmail.com', 2, 1));
-        var martha = new _classes_credentials__WEBPACK_IMPORTED_MODULE_5__["Credentials"]('cookingiscool', 'aosihgoisahdpgoihaspdoigh', 'marthathecook', new _classes_users__WEBPACK_IMPORTED_MODULE_4__["Users"]('Martha', 'Stuart', 'martha@margo.wiz', 2, 1));
-        var monty = new _classes_credentials__WEBPACK_IMPORTED_MODULE_5__["Credentials"]('hamsterparty', 'aosihgoisahdpgoihaspdoigh', 'montypython', new _classes_users__WEBPACK_IMPORTED_MODULE_4__["Users"]('Monty', 'Python', 'monty@python.com', 2, 3));
-        var james = new _classes_credentials__WEBPACK_IMPORTED_MODULE_5__["Credentials"]('shakennotstirred', 'aosihgoisahdpgoihaspdoigh', 'jamesbond', new _classes_users__WEBPACK_IMPORTED_MODULE_4__["Users"]('James', 'Bond', 'bonejamesbond@bond.com', 2, 4));
-        this.employees = new Array(bob, martha, monty, james);
     };
     ShiftService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
             providedIn: 'root'
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _classes_env__WEBPACK_IMPORTED_MODULE_5__["Env"]])
     ], ShiftService);
     return ShiftService;
 }());

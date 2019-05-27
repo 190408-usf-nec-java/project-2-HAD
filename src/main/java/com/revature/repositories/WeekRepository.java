@@ -38,10 +38,11 @@ public class WeekRepository {
 		Session session = sf.getCurrentSession();
 		week.getDays().forEach((DayOfWeek, Day) -> {
 			Day.getShifts().forEach((shift)-> {
-				session.merge(shift);
+				session.save(shift);
 			});
 		});
-		System.out.println(week);
+		session.merge(week);
+		//System.out.println(week);
 		
 	}
 }

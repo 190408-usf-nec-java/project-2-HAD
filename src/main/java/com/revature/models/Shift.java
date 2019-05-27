@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +25,8 @@ public class Shift {
 	private int endHour;
 	
 	@Autowired
-	@ManyToMany(cascade = CascadeType.ALL)
-	private List<Employee> people;
+	@ManyToMany(cascade = CascadeType.PERSIST)
+	private List<Credentials> employees;
 	
 	
 	public Shift() {
@@ -65,20 +64,20 @@ public class Shift {
 	}
 
 
-	public List<Employee> getEmployees() {
-		return people;
+	public List<Credentials> getEmployees() {
+		return employees;
 	}
 
 
-	public void setEmployees(List<Employee> employees) {
-		this.people = employees;
+	public void setEmployees(List<Credentials> employees) {
+		this.employees = employees;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((people == null) ? 0 : people.hashCode());
+		result = prime * result + ((employees == null) ? 0 : employees.hashCode());
 		result = prime * result + endHour;
 		result = prime * result + id;
 		result = prime * result + startHour;
@@ -95,10 +94,10 @@ public class Shift {
 		if (getClass() != obj.getClass())
 			return false;
 		Shift other = (Shift) obj;
-		if (people == null) {
-			if (other.people != null)
+		if (employees == null) {
+			if (other.employees != null)
 				return false;
-		} else if (!people.equals(other.people))
+		} else if (!employees.equals(other.employees))
 			return false;
 		if (endHour != other.endHour)
 			return false;
@@ -112,17 +111,17 @@ public class Shift {
 
 	@Override
 	public String toString() {
-		return "Shift [id=" + id + ", startHour=" + startHour + ", endHour=" + endHour + ", employees=" + people
+		return "Shift [id=" + id + ", startHour=" + startHour + ", endHour=" + endHour + ", employees=" + employees
 				+ "]";
 	}
 
 
-	public Shift(int id, @NotNull int startHour, @NotNull int endHour, List<Employee> employees) {
+	public Shift(int id, @NotNull int startHour, @NotNull int endHour, List<Credentials> employees) {
 		super();
 		this.id = id;
 		this.startHour = startHour;
 		this.endHour = endHour;
-		this.people = employees;
+		this.employees = employees;
 	}
 
 	
