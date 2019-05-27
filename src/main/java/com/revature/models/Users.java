@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,16 +35,18 @@ public class Users {
 	@NotNull
 	private int role;
 	
+	private String token;
+	
 	@OneToMany
 	@Column(name = "shifts")
 	private List<ShiftConfig> shiftConfigs;
 
-	public int getId() {
+	public int getUser_id() {
 		return user_id;
 	}
 
-	public void setId(int id) {
-		this.user_id = id;
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 
 	public String getFirstName() {
@@ -78,15 +81,33 @@ public class Users {
 		this.role = role;
 	}
 
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public List<ShiftConfig> getShiftConfigs() {
+		return shiftConfigs;
+	}
+
+	public void setShiftConfigs(List<ShiftConfig> shiftConfigs) {
+		this.shiftConfigs = shiftConfigs;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + user_id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + role;
+		result = prime * result + ((shiftConfigs == null) ? 0 : shiftConfigs.hashCode());
+		result = prime * result + ((token == null) ? 0 : token.hashCode());
+		result = prime * result + user_id;
 		return result;
 	}
 
@@ -109,8 +130,6 @@ public class Users {
 				return false;
 		} else if (!firstName.equals(other.firstName))
 			return false;
-		if (user_id != other.user_id)
-			return false;
 		if (lastName == null) {
 			if (other.lastName != null)
 				return false;
@@ -118,28 +137,42 @@ public class Users {
 			return false;
 		if (role != other.role)
 			return false;
+		if (shiftConfigs == null) {
+			if (other.shiftConfigs != null)
+				return false;
+		} else if (!shiftConfigs.equals(other.shiftConfigs))
+			return false;
+		if (token == null) {
+			if (other.token != null)
+				return false;
+		} else if (!token.equals(other.token))
+			return false;
+		if (user_id != other.user_id)
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + user_id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", role="
-				+ role + "]";
+		return "Users [user_id=" + user_id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", role=" + role + ", token=" + token + ", shiftConfigs=" + shiftConfigs + "]";
 	}
 
-	public Users(int id, @NotNull String firstName, @NotNull String lastName, @NotNull String email, @NotNull int role) {
+	public Users(int user_id, @NotNull String firstName, @NotNull String lastName, @NotNull String email,
+			@NotNull int role, String token, List<ShiftConfig> shiftConfigs) {
 		super();
-		this.user_id = id;
+		this.user_id = user_id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.role = role;
+		this.token = token;
+		this.shiftConfigs = shiftConfigs;
 	}
 
 	public Users() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
 	
 }

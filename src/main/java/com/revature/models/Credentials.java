@@ -10,9 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Credentials {
@@ -20,12 +23,16 @@ public class Credentials {
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
 	@Column(name = "cred_id")
 	private int id;
-	@NotNull
-	private char[] password;
 	
+	@Transient
+	private char[] password;
+
+	@JsonIgnore
+	@NotNull
 	private String hashedPassword;
 	
 	@NotNull
+	@Column(unique = true)
 	private String username;
 	
 	@Autowired
@@ -69,8 +76,8 @@ public class Credentials {
 		return user;
 	}
 
-	public void setUser(Users user) {
-		this.user = user;
+	public void setUser(Users users) {
+		this.user = users;
 	}
 
 	@Override

@@ -27,7 +27,12 @@ public class ShiftConfigRepository {
 	
 	@Transactional
 	public void saveConfig(ShiftConfig shiftConfig) {
+		String hql = "SELECT count(*) FROM people";
 		Session session = sf.getCurrentSession();
+		long numEmployees = (long)session.createQuery(hql).iterate().next();
+		shiftConfig.setNumberOfEmployees(numEmployees);
+		session.update(shiftConfig.getUsers());
+		session.save(shiftConfig.getWeekdays());
 		session.save(shiftConfig);
 	}
 

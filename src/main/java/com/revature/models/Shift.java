@@ -2,12 +2,15 @@ package com.revature.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 public class Shift {
@@ -21,27 +24,53 @@ public class Shift {
 	@NotNull
 	private int endHour;
 	
-	@ManyToMany
-	private List<Employee> employees;
-
+	@Autowired
+	@ManyToMany(cascade = CascadeType.PERSIST)
+	private List<Credentials> employees;
 	
 	
 	public Shift() {
 		super();
 	}
 
-	public Shift(int id, @NotNull int startHour, @NotNull int endHour, List<Employee> employees) {
-		super();
-		this.id = id;
-		this.startHour = startHour;
-		this.endHour = endHour;
-		this.employees = employees;
+
+	public int getId() {
+		return id;
 	}
 
-	@Override
-	public String toString() {
-		return "Shift [id=" + id + ", startHour=" + startHour + ", endHour=" + endHour + ", employees=" + employees
-				+ "]";
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public int getStartHour() {
+		return startHour;
+	}
+
+
+	public void setStartHour(int startHour) {
+		this.startHour = startHour;
+	}
+
+
+	public int getEndHour() {
+		return endHour;
+	}
+
+
+	public void setEndHour(int endHour) {
+		this.endHour = endHour;
+	}
+
+
+	public List<Credentials> getEmployees() {
+		return employees;
+	}
+
+
+	public void setEmployees(List<Credentials> employees) {
+		this.employees = employees;
 	}
 
 	@Override
@@ -54,6 +83,7 @@ public class Shift {
 		result = prime * result + startHour;
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -78,37 +108,22 @@ public class Shift {
 		return true;
 	}
 
-	public int getId() {
-		return id;
+
+	@Override
+	public String toString() {
+		return "Shift [id=" + id + ", startHour=" + startHour + ", endHour=" + endHour + ", employees=" + employees
+				+ "]";
 	}
 
-	public void setId(int id) {
+
+	public Shift(int id, @NotNull int startHour, @NotNull int endHour, List<Credentials> employees) {
+		super();
 		this.id = id;
-	}
-
-	public int getStartHour() {
-		return startHour;
-	}
-
-	public void setStartHour(int startHour) {
 		this.startHour = startHour;
-	}
-
-	public int getEndHour() {
-		return endHour;
-	}
-
-	public void setEndHour(int endHour) {
 		this.endHour = endHour;
-	}
-
-	public List<Employee> getEmployees() {
-		return employees;
-	}
-
-	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
 	}
+
 	
 	
 }

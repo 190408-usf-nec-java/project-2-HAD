@@ -2,6 +2,7 @@ package com.revature.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +16,7 @@ public class Employee {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Shift> shifts;
 
 	public int getId() {

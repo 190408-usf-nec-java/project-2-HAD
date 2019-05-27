@@ -1,14 +1,17 @@
 package com.revature.models;
 
-import java.util.List;
+import java.time.DayOfWeek;
+import java.util.Map;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 public class Week {
@@ -17,11 +20,12 @@ public class Week {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Day firstDay;
 	
-	@OneToMany
-	private List<Day> days;
+	@Autowired
+	@OneToMany(cascade = CascadeType.ALL)
+	private Map<DayOfWeek, Day> days;
 
 	public int getId() {
 		return id;
@@ -31,12 +35,21 @@ public class Week {
 		this.id = id;
 	}
 
-	public List<Day> getDays() {
+	public Map<DayOfWeek, Day> getDays() {
 		return days;
 	}
 
-	public void setDays(List<Day> days) {
+	public void setDays(Map<DayOfWeek, Day> days) {
 		this.days = days;
+	}
+
+	
+	public Day getFirstDay() {
+		return firstDay;
+	}
+
+	public void setFirstDay(Day firstDay) {
+		this.firstDay = firstDay;
 	}
 
 	@Override
@@ -44,6 +57,7 @@ public class Week {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((days == null) ? 0 : days.hashCode());
+		result = prime * result + ((firstDay == null) ? 0 : firstDay.hashCode());
 		result = prime * result + id;
 		return result;
 	}
@@ -62,6 +76,11 @@ public class Week {
 				return false;
 		} else if (!days.equals(other.days))
 			return false;
+		if (firstDay == null) {
+			if (other.firstDay != null)
+				return false;
+		} else if (!firstDay.equals(other.firstDay))
+			return false;
 		if (id != other.id)
 			return false;
 		return true;
@@ -69,12 +88,13 @@ public class Week {
 
 	@Override
 	public String toString() {
-		return "Week [id=" + id + ", days=" + days + "]";
+		return "Week [id=" + id + ", firstDay=" + firstDay + ", days=" + days + "]";
 	}
 
-	public Week(int id, List<Day> days) {
+	public Week(int id, Day firstDay, Map<DayOfWeek, Day> days) {
 		super();
 		this.id = id;
+		this.firstDay = firstDay;
 		this.days = days;
 	}
 
